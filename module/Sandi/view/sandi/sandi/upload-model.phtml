@@ -1,0 +1,19 @@
+<?php ini_set('default_charset','utf-8');?>
+<?php $form->prepare(); // The correct enctype is set here ?>
+<?php echo $this->form()->openTag($form); ?>
+
+    <div class="form-element">
+		<?php echo $this->formHidden($form->get('model_id')); ?><br><br>
+		<?php echo $this->formHidden($form->get('user_id')); ?><br><br>
+		<?php echo $this->formRow($form->get('profile')); ?><br><br>
+		<?php echo $this->formRow($form->get('price')); ?><br><br>
+		<?php echo $this->formRow($form->get('offer')); ?><br><br>			
+		<?php echo $this->formRow($form->get('category')); ?><br><br>
+        <?php $fileElement = $form->get('image-file'); ?><br><br>
+        <?php echo $this->formLabel($fileElement); ?><br><br>
+        <?php echo $this->formFile($fileElement); ?><br><br>
+        <?php echo $this->formElementErrors($fileElement); ?><br><br>
+    </div>
+    <button>Submit</button>
+
+<?php echo $this->form()->closeTag(); ?>

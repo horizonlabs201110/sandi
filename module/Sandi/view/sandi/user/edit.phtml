@@ -1,0 +1,36 @@
+<?php
+use Zend\Session\Container;
+$sessionUser = new Container('user');
+$userName = $sessionUser->name;
+$userID = $sessionUser->user_id;
+
+$this->headTitle("User Edit");
+?>
+<h1><?php echo $this->escapeHtml("User Edit"); ?></h1>
+
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url(
+    'user',
+    array(
+        'action' => 'edit',
+        'id'     => $userID,
+    )
+));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('user_id')). "<br><br>";
+echo $this->formRow($form->get('alias')). "<br><br>";
+echo $this->formRow($form->get('password')). "<br><br>";
+echo $this->formRow($form->get('user_account')). "<br><br>";
+//echo $this->formHidden($form->get('last_login')). "<br><br>";
+//echo $this->formHidden($form->get('status')). "<br><br>";
+echo $this->formRow($form->get('profile')). "<br><br>";
+
+$fileElement = $form->get('avatar-file');
+echo $this->formLabel($fileElement);
+echo $this->formFile($fileElement). "<br><br>";
+
+echo $this->formSubmit($form->get('submit')). "<br><br>";
+

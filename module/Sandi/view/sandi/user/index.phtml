@@ -1,0 +1,15 @@
+<table class="table">
+<tr>
+    <th>username</th>
+    <th>profile</th>
+	<th>&nbsp;</th>
+</tr>
+<tr>
+    <td><?php echo $this->escapeHtml($user[0]["user_id"]);?></td>
+    <td><?php echo $this->escapeHtml($user[0]["profile"]);?></td>
+	<!--<td>php echo $this->escapeHtml($model->contents);</td>-->
+	<td>
+		<a href="<?php echo $this->url('user', array('action'=>'edit', 'id' => $user[0]["user_id"]));?>">edit user message</a>
+    </td>
+</tr>
+</table>

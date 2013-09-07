@@ -1,0 +1,53 @@
+<?php 
+ini_set('default_charset','gb2312');
+use Zend\Session\Container;
+$sessionUser = new Container('user');
+echo $sessionUser->user_id;
+
+
+
+if ($sessionUser->name != NULL)
+{
+?>	<h>欢迎您：<?php echo $sessionUser->name?> &nbsp;&nbsp;<a href = "/sandi/upload-model">上传模型</a>&nbsp;&nbsp;<a href = "/user/index/<?php echo $sessionUser->user_id ?>">我的信息</a>&nbsp;&nbsp;<a href = "/user/logout">退出</a></h>
+<?php 
+}
+else
+{?>
+<h>您还没登录！ <br> <a href = "/user/login">登录</a> <a href = "/user/add">注册新用户</a> </h>
+<?php 
+}
+?>
+
+
+<table class="table">
+<tr>
+    <td><a href = "/sandi/index/1">工艺品</a></td>
+    <td><a href = "/sandi/index/2">美术品</a></td>
+	<td><a href = "/sandi/index/3">ee</a></td>
+</tr>
+</table>
+
+
+<table class="table">
+<tr>
+    <th>model id</th>
+    <th>profile</th>
+	<th>&nbsp;</th>
+	<th>&nbsp;</th>
+</tr>
+<?php 
+//define('S_ROOT', dirname(__FILE__).DIRECTORY_SEPARATOR);
+define("SITE_PATH", $this->serverUrl());
+//echo $this->url('home');
+foreach ($models as $model) : ?>
+<tr>
+    <td><?php echo $this->escapeHtml($model->model_id);?></td>
+    <td><?php echo $this->escapeHtml($model->profile);?></td>
+	<!--<td>php echo $this->escapeHtml($model->contents);</td>-->
+    <td><img src= '<?php echo SITE_PATH . '/3d-model-file/' . $model->model_id. '/11.png'?>' /></td>
+	<td>
+		<a href="<?php echo $this->url('sandi', array('action'=>'modelDetail', 'id' => $model->model_id));?>">Model detail</a>
+    </td>
+</tr>
+<?php endforeach; ?>
+</table>

@@ -1,0 +1,16 @@
+<?php 
+ini_set('default_charset','gb2312');
+use Zend\Session\Container;
+$sessionUser = new Container('user');
+
+if ($informID== 1)
+{?>	
+<h>上传模型成功！&nbsp;&nbsp;<a href = "/sandi/index">返回主页</a></h>
+<?php 
+}
+if ($informID== 2)
+{?>
+<h>修改模型成功！&nbsp;&nbsp;<a href = "/sandi/index">返回主页</a></h>
+<?php 
+}
+?>

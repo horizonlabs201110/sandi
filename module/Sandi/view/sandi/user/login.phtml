@@ -1,0 +1,22 @@
+<?php
+//ini_set('default_charset','utf-8');
+$title = '”√ªßµ«¬º';
+//$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title);?></h1>
+
+<?php
+$url = $this->url('user', array(
+    'action' => 'login',
+));
+?>
+<form action="<?php echo $url; ?>" method="post">
+<div>
+    ’ ∫≈£∫<input type="text" name="user_account" value="" /><br>
+    √‹¬Î£∫ <input type="text" name="password" value="" /><br>
+    <input type="submit" name="login" value="µ«¬º" />
+</div>
+</form>
+
+
+
