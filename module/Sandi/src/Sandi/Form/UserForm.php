@@ -22,25 +22,31 @@ class UserForm extends Form
 		$this->add(array(
             'name' => 'user_account',
             'type' => 'Text',
-            'options' => array(
-                'label' => 'user account',
+			'attributes' => array(
+                'class' => 'form-control',
+				'placeholder' => 'user_account'
             ),
         ));
 		
         $this->add(array(
             'name' => 'alias',
             'type' => 'Text',
-            'options' => array(
-                'label' => 'alias',
+			'attributes' => array(
+                'class' => 'form-control',
+				'placeholder' => 'alias'
             ),
         ));
 		
         $this->add(array(
             'name' => 'password',
             'type' => 'Text',
-            'options' => array(
-                'label' => 'password',
-            ),
+			'attributes' => array(
+                'class'			=> 'form-control',
+				'placeholder' 	=> 'password'
+            ),	
+            // 'options' => array(
+                // 'label' => 'password',
+            // ),
         ));
 
         $this->add(array(
@@ -56,23 +62,26 @@ class UserForm extends Form
         $this->add(array(
             'name' => 'avatar',
             'type' => 'Text',
-            'options' => array(
-                'label' => 'avatar',
-            ),			
+		'attributes' => array(
+                'class'			=> 'form-control',
+				'placeholder' 	=> 'avatar'
+            ),	
          ));
 
 		// File Input
         $file = new Element\File('avatar-file');
         $file->setLabel('avatar file Upload')
-             ->setAttribute('id', 'avatar-file');
+             ->setAttribute('id', 'avatar-file')
+			 ->setAttribute('class', 'form-control');
         $this->add($file);		
 		 
         
 		$this->add(array(
             'name' => 'profile',
             'type' => 'Text',
-            'options' => array(
-                'label' => 'profile',
+			'attributes' => array(
+                'class'			=> 'form-control',
+				'placeholder' 	=> 'profile'
             ),
         ));										
         $this->add(array(
@@ -80,7 +89,8 @@ class UserForm extends Form
             'type' => 'Submit',
             'attributes' => array(
                 'value' => 'Go',
-                'id' => 'submitbutton',
+                'id' 	=> 'submitbutton',
+				'class' => 'btn btn-lg btn-primary btn-block'
             ),
         ));
     }

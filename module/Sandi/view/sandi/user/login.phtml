@@ -1,22 +1,50 @@
 <?php
-//ini_set('default_charset','utf-8');
-$title = '”√ªßµ«¬º';
-//$this->headTitle($title);
-?>
-<h1><?php echo $this->escapeHtml($title);?></h1>
-
-<?php
 $url = $this->url('user', array(
     'action' => 'login',
 ));
 ?>
-<form action="<?php echo $url; ?>" method="post">
-<div>
-    ’ ∫≈£∫<input type="text" name="user_account" value="" /><br>
-    √‹¬Î£∫ <input type="text" name="password" value="" /><br>
-    <input type="submit" name="login" value="µ«¬º" />
+<html lang="en" class="login-wrap">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Login In</title>
+
+    <!-- Bootstrap core CSS -->
+<?php
+    echo $this->headLink()->prependStylesheet($this->basePath() . '/bootstrap/css/bootstrap.min.css');
+    echo $this->headLink()->prependStylesheet($this->basePath() . '/css/style.css');
+?>
+
+</head>
+
+<body class="login-wrap">
+<div style="height:120px;text-align:center;font-size: 20px;">
+    3D  Logo
 </div>
-</form>
+<div class="container">
 
+    <form action="<?php echo $url; ?>" method="post">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <input type="text" class="form-control"  name="user_account" placeholder="Email address" autofocus>
+        <input type="password" class="form-control" name="password" placeholder="Password">
+        <label class="checkbox">
+            <input type="checkbox" value="remember-me"> Remember me
+        </label>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Login in</button>
+    </form>
 
+</div> <!-- /container -->
 
+<hr>
+<div id="wrap">
+    <div id="footer">
+        <div class="container">
+            <p class="text-muted credit">Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a> and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

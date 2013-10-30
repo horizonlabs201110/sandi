@@ -47,4 +47,13 @@ return array(
             'sandi' => __DIR__ . '/../view',
         ),
     ),
+	
+    'asset_manager' => array(
+        'resolver_configs' => array(
+            'paths' => array(
+                'public' => __DIR__ . '/../public',
+            ),
+        ),
+	),
+	
 );

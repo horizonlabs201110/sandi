@@ -8,4 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'Zend\\' => array($vendorDir . '/zendframework/zendframework/library'),
     'ZendTest\\' => array($vendorDir . '/zendframework/zendframework/tests'),
+    'Symfony\\Component\\Process\\' => array($vendorDir . '/symfony/process'),
+    'Assetic' => array($vendorDir . '/kriswallsmith/assetic/src'),
+    'AssetManager' => array($vendorDir . '/rwoverdijk/assetmanager/src'),
 );
