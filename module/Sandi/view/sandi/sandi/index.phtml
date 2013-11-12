@@ -1,22 +1,28 @@
 <?php 
+//$local = new Zend_Locale();
 //ini_set('default_charset','gb2312');
 use Zend\Session\Container;
 $sessionUser = new Container('user');
-echo $sessionUser->user_id;
+//echo $sessionUser->user_id;
+
+;
 ?>
 <html>
 <head>
-    <title>3D</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <?php
     echo $this->headLink()->prependStylesheet($this->basePath() . '/bootstrap/css/bootstrap.min.css');
-    echo $this->headLink()->prependStylesheet($this->basePath() . '/css/style.css');	
-?>	
+    echo $this->headLink()->prependStylesheet($this->basePath() . '/css/style.css');
+	$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=GBK')
+                 ->appendHttpEquiv('Content-Language', 'zh-CN')
+?>
+	<title>3D模型</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
 <div style="height:120px;text-align:center;font-size: 20px;">
-    3D  Logo
+    3D  模型
 </div>
 <div class="container">
     <nav class="navbar navbar-default" role="navigation">

@@ -56,17 +56,21 @@ class UploadModelForm extends Form
 		$this->add(array(
 			'name' => 'profile',
 			'type' => 'Text',
-			'options' => array(
-				'label' => 'profile',
-			),
+			'attributes' => array(
+                'class' => 'form-control',
+				'placeholder' => 'profile',
+				'size' => '20'
+				
+            ),	
 		));	
 		
 		$this->add(array(
 			'name' => 'price',
 			'type' => 'Text',
-			'options' => array(
-				'label' => 'price',
-			),
+			'attributes' => array(
+                'class' => 'form-control',
+				'placeholder' => 'price'
+            ),				
 		));
 		
 		$this->add(array(
@@ -81,8 +85,8 @@ class UploadModelForm extends Form
 			),
 			'attributes' => array(
 				'value' => 2, //set selected to "download"
-	
 			),
+			
 		));	
 
 		// File Input
@@ -97,6 +101,7 @@ class UploadModelForm extends Form
             'attributes' => array(
                 'value' => 'Go',
                 'id' => 'submitbutton',
+				'class' => 'form-control'
             ),
         ));
 		

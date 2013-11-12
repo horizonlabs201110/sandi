@@ -227,7 +227,7 @@ class SandiController extends AbstractActionController
 					$model->exchangeArray($data);
 					$model->owner_id = $sessionUser->user_id;
 					
-					echo $sessionUser->user_id;
+					//echo $sessionUser->user_id;
 					$model->designer_id = $sessionUser->user_id;
 					
 					$this->getModelTable()->SaveModel($model);
@@ -236,7 +236,7 @@ class SandiController extends AbstractActionController
 					$lastInsertModelID = $this->getModelTable()->lastInsertValue;
 					$price = $data["price"];
 					$offer = $data["offer"];
-					echo $offer. "<br>";
+					//echo $offer. "<br>";
 					
 					if($price != NULL)
 					{
@@ -287,10 +287,11 @@ class SandiController extends AbstractActionController
 					$data_imgFile = $data["image-file"];
 					$name = $data_imgFile["name"];
 					$tmp_name = $data_imgFile["tmp_name"];
-					echo $tmp_name. "<br>";
+					//echo $tmp_name. "<br>";
 					
-					$savePath = './3d-model-file/' . $lastInsertModelID . '/';
-					echo $savePath . $name . "<br>";
+					//$savePath = './3d-model-file/' . $lastInsertModelID . '/';
+					$savePath =  __DIR__ . '\\..\\..\\..\\public\\img\\' . $lastInsertModelID . '\\';
+					//echo $savePath . $name . "<br>";
 					
 					if(!file_exists($savePath))
 					{
