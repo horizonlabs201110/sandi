@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,7 +7,6 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\Mvc\Service;
 
 use Zend\Console\Console;
@@ -15,20 +15,18 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Mvc\View\Console\ViewManager as ConsoleViewManager;
 use Zend\Mvc\View\Http\ViewManager as HttpViewManager;
 
-class ViewManagerFactory implements FactoryInterface
-{
-    /**
-     * Create and return a view manager based on detected environment
-     *
-     * @param  ServiceLocatorInterface $serviceLocator
-     * @return ConsoleViewManager|HttpViewManager
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
-    {
-        if (Console::isConsole()) {
-            return $serviceLocator->get('ConsoleViewManager');
-        }
-
-        return $serviceLocator->get('HttpViewManager');
-    }
+class ViewManagerFactory implements FactoryInterface {
+	/**
+	 * Create and return a view manager based on detected environment
+	 *
+	 * @param ServiceLocatorInterface $serviceLocator        	
+	 * @return ConsoleViewManager HttpViewManager
+	 */
+	public function createService(ServiceLocatorInterface $serviceLocator) {
+		if (Console::isConsole ()) {
+			return $serviceLocator->get ( 'ConsoleViewManager' );
+		}
+		
+		return $serviceLocator->get ( 'HttpViewManager' );
+	}
 }

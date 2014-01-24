@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,14 +7,12 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\Db\TableGateway;
 
-interface TableGatewayInterface
-{
-    public function getTable();
-    public function select($where = null);
-    public function insert($set);
-    public function update($set, $where = null);
-    public function delete($where);
+interface TableGatewayInterface {
+	public function getTable();
+	public function select($where = null);
+	public function insert($set);
+	public function update($set, $where = null);
+	public function delete($where);
 }

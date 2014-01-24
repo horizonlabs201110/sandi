@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,7 +7,6 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\Text\Figlet\Exception;
 
 use Zend\Text\Exception;
@@ -14,7 +14,5 @@ use Zend\Text\Exception;
 /**
  * Exception class for Zend\Text
  */
-class UnexpectedValueException
-    extends Exception\UnexpectedValueException
-    implements ExceptionInterface
-{}
+class UnexpectedValueException extends Exception\UnexpectedValueException implements ExceptionInterface {
+}

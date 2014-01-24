@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,16 +7,14 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\ModuleManager\Feature;
 
-interface FilterProviderInterface
-{
-    /**
-     * Expected to return \Zend\ServiceManager\Config object or array to
-     * seed such an object.
-     *
-     * @return array|\Zend\ServiceManager\Config
-     */
-    public function getFilterConfig();
+interface FilterProviderInterface {
+	/**
+	 * Expected to return \Zend\ServiceManager\Config object or array to
+	 * seed such an object.
+	 *
+	 * @return array \Zend\ServiceManager\Config
+	 */
+	public function getFilterConfig();
 }

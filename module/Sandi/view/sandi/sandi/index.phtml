@@ -1,136 +1,134 @@
-<?php 
-//$local = new Zend_Locale();
-//ini_set('default_charset','gb2312');
+﻿<?php
+// ini_set('default_charset','gbk');
 use Zend\Session\Container;
-$sessionUser = new Container('user');
-//echo $sessionUser->user_id;
-
-;
+$sessionUser = new Container ( 'user' );
 ?>
 <html>
 <head>
-
-<?php
-    echo $this->headLink()->prependStylesheet($this->basePath() . '/bootstrap/css/bootstrap.min.css');
-    echo $this->headLink()->prependStylesheet($this->basePath() . '/css/style.css');
-	$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=GBK')
-                 ->appendHttpEquiv('Content-Language', 'zh-CN')
-?>
-	<title>3Dģ��</title>
+	<?php 
+		echo $this->headLink ()->prependStylesheet ( $this->basePath () . '/bootstrap/css/bootstrap.min.css' );
+		echo $this->headLink ()->prependStylesheet ( $this->basePath () . '/css/style.css' );
+	?>
+	<title>3D</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
-<div style="height:120px;text-align:center;font-size: 20px;">
-    3D  ģ��
-</div>
-<div class="container">
-    <nav class="navbar navbar-default" role="navigation">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Brand</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href = "/sandi/index/1">Handicraft</a></li>
-                <li><a href = "/sandi/index/2">Artist</a></li>
-				<li><a href = "/sandi/index/3">ee</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <form class="navbar-form navbar-left" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="src/html/cart.html"><i class="glyphicon glyphicon-shopping-cart"></i></a></li>
-				<?php
-				if ($sessionUser->name != NULL)
-				{
-				?>	
-					<li><b>welcome: <?php echo $sessionUser->name?></b></li>
-					<li><a href = "/sandi/upload-model">upload model</a></li>
-					<li><a href = "/user/index/<?php echo $sessionUser->user_id ?>">My Information</a></li>
-					<li><a href = "/user/logout">Log out</a></li>
-				<?php 
-				}
-				else
-				{?>
-					<li><a href = "/user/login">log in </a></li> 
-					<li><a href = "/user/add">sign up</a> </li>
-				<?php 
-				}
-				?>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </nav>
-</div>
-<div class="container">
-    <div class="row">
-<?php 
-	define("SITE_PATH", $this->serverUrl());
-	foreach ($models as $model):
+	<div style="height: 120px; text-align: center; font-size: 20px;">3D模型
+	</div>
+	<div class="container">
+		<nav class="navbar navbar-default" role="navigation">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Brand</a>
+			</div>
+			<div>
+					<ul class="nav navbar-nav navbar-right">
+					<li><a href="src/html/cart.html"><i class="glyphicon glyphicon-shopping-cart"></i></a></li>
+					<?php
+					if ($sessionUser->name != NULL) {
+						?>	
+						<li><b>welcome: <?php echo $sessionUser->name?></b></li>
+						<li><a href="/sandi/upload-model">upload model</a></li>
+						<li><a href="/user/index/<?php echo $sessionUser->user_id ?>">My
+								Information</a></li>
+						<li><a href="/user/logout">Log out</a></li>
+					<?php
+					} else {
+						?>
+						<li><a href="/user/login">log in </a></li>
+						<li><a href="/user/add">sign up</a></li>
+					<?php
+					}
+					?>
+	            </ul>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="/sandi/index/1">工艺品</a></li>
+					<li><a href="/sandi/index/2">汽车模型</a></li>
+					<li><a href="/sandi/index/3">飞机模型</a></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Action</a></li>
+							<li><a href="#">Another action</a></li>
+							<li><a href="#">Something else here</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Separated link</a></li>
+							<li class="divider"></li>
+							<li><a href="#">One more separated link</a></li>
+						</ul></li>
+				</ul>
+				<form class="navbar-form navbar-left" role="search">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Search">
+					</div>
+					<button type="submit" class="btn btn-default">Submit</button>
+				</form>
+			</div>
+			<!-- /.navbar-collapse -->
+		</nav>
+	</div>
+	<div class="container">
+		<div class="row">
+<?php
+	define ( "SITE_PATH", $this->serverUrl() );
+	foreach ( $paginator as $model ):
 ?>
         <div class="col-sm-6 col-md-3">
-            <div class="thumbnail">
-                <h5><?php echo $this->escapeHtml($model->model_id);?></h5>
-                <img data-src="holder.js/240x200" alt="..." src="<?php echo $this->basePath(). '/img/pro.jpg' ;?>">
-                <div class="caption">
-                    <h3><?php echo $this->escapeHtml($model->profile);?></h3>
-                    <p>...</p>
-                    <p>
-                        <p class="frome-text">Frome:$77.00</p>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span href="#" class="glyphicon glyphicon-star-empty"></span>
-                        <span href="#" class="glyphicon glyphicon-star-empty"></span>
-                    </p>
-					<p><a href="<?php echo $this->url('sandi', array('action'=>'modelDetail', 'id' => $model->model_id));?>">Model detail</a></p>
-                </div>
-            </div>
-        </div>
+				<div class="thumbnail">
+					<!--<h5><?php echo $this->escapeHtml($model->model_id);?></h5> -->
+					<!-- <img data-src="holder.js/240x200" alt="..." src="<?php echo $this->basePath(). '/img/pro.jpg' ;?>"> -->
+					<a href="<?php echo $this->url('sandi', array('action'=>'modelDetail', 'id' => $model->model_id));?>">
+					<img data-src="holder.js/200x200" alt="..."	src="<?php echo $this->url('sandi', array('action'=>'showPrincipalModelImage', 'id' =>$model->model_id));?>" />
+					</a>
+					<div class="caption">
+						<h3></h3>
+						<span class="glyphicon glyphicon-star"></span>
+						<span class="glyphicon glyphicon-star"></span>
+						<span class="glyphicon glyphicon-star"></span>
+						<span href="#" class="glyphicon glyphicon-star-empty"></span>
+						<span href="#" class="glyphicon glyphicon-star-empty"></span>
+						<p><a href="<?php echo $this->url('sandi', array('action'=>'modelDetail', 'id' => $model->model_id));?>">模型详细信息</a></p>
+					</div>
+				</div>
+			</div>
 	<?php endforeach; ?>
-	</div>	
+	</div>
 
-    <ul class="pagination pagination-lg">
-        <li class="disabled" ><a href="#">&laquo;</a></li>
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">&raquo;</a></li>
+		<ul class="pagination pagination-lg">
+	 <?php
+		// add at the end of the file after the table
+		echo $this->paginationControl ( 
+				// the paginator object
+				$this->paginator, 
+				// the scrolling style
+				'sliding', 
+				// the partial to use to render the control
+				array (
+						'partial/paginator.phtml',
+						'Sandi' 
+				) );		// ,
+		    // the route to link to when a user clicks a control link
+		    // array(
+		    // 'route' => ''
+		    // )
+		
+		?>
     </ul>
-</div>
+	</div>
 
-<hr>
-<div id="wrap">
-    <div id="footer">
-        <div class="container">
-            <p class="text-muted credit">Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a> and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.</p>
-        </div>
-    </div>
-</div>
+	<hr>
+	<div id="wrap">
+		<div id="footer"></div>
+	</div>
 </body>
 </html>

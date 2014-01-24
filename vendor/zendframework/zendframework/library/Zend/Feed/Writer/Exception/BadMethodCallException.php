@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,7 +7,6 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\Feed\Writer\Exception;
 
 use Zend\Feed\Exception;
@@ -16,7 +16,5 @@ use Zend\Feed\Exception;
  *
  * Class to represent exceptions that occur during Feed operations.
  */
-class BadMethodCallException
-    extends Exception\BadMethodCallException
-    implements ExceptionInterface
-{}
+class BadMethodCallException extends Exception\BadMethodCallException implements ExceptionInterface {
+}

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,19 +7,17 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\EventManager;
 
 /**
  * Interface to automate setter injection for an EventManager instance
  */
-interface EventManagerAwareInterface extends EventsCapableInterface
-{
-    /**
-     * Inject an EventManager instance
-     *
-     * @param  EventManagerInterface $eventManager
-     * @return void
-     */
-    public function setEventManager(EventManagerInterface $eventManager);
+interface EventManagerAwareInterface extends EventsCapableInterface {
+	/**
+	 * Inject an EventManager instance
+	 *
+	 * @param EventManagerInterface $eventManager        	
+	 * @return void
+	 */
+	public function setEventManager(EventManagerInterface $eventManager);
 }

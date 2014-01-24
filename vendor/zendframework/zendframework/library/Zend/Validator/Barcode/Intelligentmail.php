@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,20 +7,22 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\Validator\Barcode;
 
-class Intelligentmail extends AbstractAdapter
-{
-    /**
-     * Constructor
-     *
-     * Sets check flag to false.
-     */
-    public function __construct()
-    {
-        $this->setLength(array(20, 25, 29, 31));
-        $this->setCharacters('0123456789');
-        $this->useChecksum(false);
-    }
+class Intelligentmail extends AbstractAdapter {
+	/**
+	 * Constructor
+	 *
+	 * Sets check flag to false.
+	 */
+	public function __construct() {
+		$this->setLength ( array (
+				20,
+				25,
+				29,
+				31 
+		) );
+		$this->setCharacters ( '0123456789' );
+		$this->useChecksum ( false );
+	}
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,13 +7,11 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\Mvc\Service;
 
 use Zend\ServiceManager\ConfigInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class HydratorManagerFactory extends AbstractPluginManagerFactory
-{
-    const PLUGIN_MANAGER_CLASS = 'Zend\Stdlib\Hydrator\HydratorPluginManager';
+class HydratorManagerFactory extends AbstractPluginManagerFactory {
+	const PLUGIN_MANAGER_CLASS = 'Zend\Stdlib\Hydrator\HydratorPluginManager';
 }

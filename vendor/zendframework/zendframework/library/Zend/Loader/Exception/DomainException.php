@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,10 +7,8 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\Loader\Exception;
 
 require_once __DIR__ . '/ExceptionInterface.php';
-
-class DomainException extends \DomainException implements ExceptionInterface
-{}
+class DomainException extends \DomainException implements ExceptionInterface {
+}

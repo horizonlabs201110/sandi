@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,19 +7,18 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\ServiceManager;
 
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-interface InitializerInterface
-{
-    /**
-     * Initialize
-     *
-     * @param $instance
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return mixed
-     */
-    public function initialize($instance, ServiceLocatorInterface $serviceLocator);
+interface InitializerInterface {
+	/**
+	 * Initialize
+	 *
+	 * @param
+	 *        	$instance
+	 * @param ServiceLocatorInterface $serviceLocator        	
+	 * @return mixed
+	 */
+	public function initialize($instance, ServiceLocatorInterface $serviceLocator);
 }

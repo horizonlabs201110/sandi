@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,18 +7,16 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\Filter\Word;
 
-class UnderscoreToSeparator extends SeparatorToSeparator
-{
-    /**
-     * Constructor
-     *
-     * @param  string $replacementSeparator Space by default
-     */
-    public function __construct($replacementSeparator = ' ')
-    {
-        parent::__construct('_', $replacementSeparator);
-    }
+class UnderscoreToSeparator extends SeparatorToSeparator {
+	/**
+	 * Constructor
+	 *
+	 * @param string $replacementSeparator
+	 *        	Space by default
+	 */
+	public function __construct($replacementSeparator = ' ') {
+		parent::__construct ( '_', $replacementSeparator );
+	}
 }

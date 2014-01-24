@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,7 +7,6 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\Math\BigInteger\Exception;
 
 use Zend\Math\Exception;
@@ -14,5 +14,5 @@ use Zend\Math\Exception;
 /**
  * Invalid argument exception
  */
-class InvalidArgumentException extends Exception\InvalidArgumentException implements ExceptionInterface
-{}
+class InvalidArgumentException extends Exception\InvalidArgumentException implements ExceptionInterface {
+}

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,7 +7,6 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\EventManager;
 
 /**
@@ -17,22 +17,21 @@ namespace Zend\EventManager;
  * then be called with the current SharedEventManager instance, allowing the class to
  * wire up one or more listeners.
  */
-interface SharedListenerAggregateInterface
-{
-    /**
-     * Attach one or more listeners
-     *
-     * Implementors may add an optional $priority argument; the SharedEventManager
-     * implementation will pass this to the aggregate.
-     *
-     * @param SharedEventManagerInterface $events
-     */
-    public function attachShared(SharedEventManagerInterface $events);
-
-    /**
-     * Detach all previously attached listeners
-     *
-     * @param SharedEventManagerInterface $events
-     */
-    public function detachShared(SharedEventManagerInterface $events);
+interface SharedListenerAggregateInterface {
+	/**
+	 * Attach one or more listeners
+	 *
+	 * Implementors may add an optional $priority argument; the SharedEventManager
+	 * implementation will pass this to the aggregate.
+	 *
+	 * @param SharedEventManagerInterface $events        	
+	 */
+	public function attachShared(SharedEventManagerInterface $events);
+	
+	/**
+	 * Detach all previously attached listeners
+	 *
+	 * @param SharedEventManagerInterface $events        	
+	 */
+	public function detachShared(SharedEventManagerInterface $events);
 }

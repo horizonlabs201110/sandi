@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -8,12 +9,11 @@
  */
 namespace Zend\Stdlib\Hydrator\Filter;
 
-interface FilterProviderInterface
-{
-    /**
-     * Provides a filter for hydration
-     *
-     * @return FilterInterface
-     */
-    public function getFilter();
+interface FilterProviderInterface {
+	/**
+	 * Provides a filter for hydration
+	 *
+	 * @return FilterInterface
+	 */
+	public function getFilter();
 }

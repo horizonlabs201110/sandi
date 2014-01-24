@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,12 +7,9 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\Feed\Reader\Exception;
 
 use Zend\Feed\Exception;
 
-class RuntimeException
-    extends Exception\RuntimeException
-    implements ExceptionInterface
-{}
+class RuntimeException extends Exception\RuntimeException implements ExceptionInterface {
+}

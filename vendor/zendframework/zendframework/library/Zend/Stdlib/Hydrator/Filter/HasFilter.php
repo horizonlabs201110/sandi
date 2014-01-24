@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -8,20 +9,18 @@
  */
 namespace Zend\Stdlib\Hydrator\Filter;
 
-class HasFilter implements FilterInterface
-{
-    public function filter($property)
-    {
-        $pos = strpos($property, '::');
-        if ($pos !== false) {
-            $pos += 2;
-        } else {
-            $pos = 0;
-        }
-
-        if (substr($property, $pos, 3) === 'has') {
-            return true;
-        }
-        return false;
-    }
+class HasFilter implements FilterInterface {
+	public function filter($property) {
+		$pos = strpos ( $property, '::' );
+		if ($pos !== false) {
+			$pos += 2;
+		} else {
+			$pos = 0;
+		}
+		
+		if (substr ( $property, $pos, 3 ) === 'has') {
+			return true;
+		}
+		return false;
+	}
 }

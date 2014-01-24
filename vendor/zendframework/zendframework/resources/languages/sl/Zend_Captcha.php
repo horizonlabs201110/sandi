@@ -19,14 +19,14 @@
 /**
  * EN-Revision: 30.Jul.2011
  */
-return array(
-    // Zend_Captcha_ReCaptcha
-    "Missing captcha fields" => "Manjka varnostna koda",
-    "Failed to validate captcha" => "Varnostne kode ni bilo mogoče preveriti",
-    "Captcha value is wrong: %value%" => "Napačna varnostna koda: %value%",
-
-    // Zend_Captcha_Word
-    "Empty captcha value" => "Prazna varnostna koda",
-    "Captcha ID field is missing" => "Polje ID varnostne kode manjka",
-    "Captcha value is wrong" => "Varnostna koda je napačna",
+return array (
+		// Zend_Captcha_ReCaptcha
+		"Missing captcha fields" => "Manjka varnostna koda",
+		"Failed to validate captcha" => "Varnostne kode ni bilo mogoče preveriti",
+		"Captcha value is wrong: %value%" => "Napačna varnostna koda: %value%",
+		
+		// Zend_Captcha_Word
+		"Empty captcha value" => "Prazna varnostna koda",
+		"Captcha ID field is missing" => "Polje ID varnostne kode manjka",
+		"Captcha value is wrong" => "Varnostna koda je napačna" 
 );

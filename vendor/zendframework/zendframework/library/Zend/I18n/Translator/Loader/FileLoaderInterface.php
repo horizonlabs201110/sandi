@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,20 +7,18 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\I18n\Translator\Loader;
 
 /**
  * File loader interface.
  */
-interface FileLoaderInterface
-{
-    /**
-     * Load translations from a file.
-     *
-     * @param  string $locale
-     * @param  string $filename
-     * @return \Zend\I18n\Translator\TextDomain|null
-     */
-    public function load($locale, $filename);
+interface FileLoaderInterface {
+	/**
+	 * Load translations from a file.
+	 *
+	 * @param string $locale        	
+	 * @param string $filename        	
+	 * @return \Zend\I18n\Translator\TextDomain null
+	 */
+	public function load($locale, $filename);
 }

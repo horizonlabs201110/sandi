@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,25 +7,22 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\Mvc\Service;
 
 use Zend\ServiceManager\ConfigInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class FilterManagerFactory extends AbstractPluginManagerFactory
-{
-    const PLUGIN_MANAGER_CLASS = 'Zend\Filter\FilterPluginManager';
-
-    /**
-     * Create and return the filter plugin manager
-     *
-     * @param  ServiceLocatorInterface $serviceLocator
-     * @return \Zend\Filter\FilterPluginManager
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
-    {
-        $plugins = parent::createService($serviceLocator);
-        return $plugins;
-    }
+class FilterManagerFactory extends AbstractPluginManagerFactory {
+	const PLUGIN_MANAGER_CLASS = 'Zend\Filter\FilterPluginManager';
+	
+	/**
+	 * Create and return the filter plugin manager
+	 *
+	 * @param ServiceLocatorInterface $serviceLocator        	
+	 * @return \Zend\Filter\FilterPluginManager
+	 */
+	public function createService(ServiceLocatorInterface $serviceLocator) {
+		$plugins = parent::createService ( $serviceLocator );
+		return $plugins;
+	}
 }

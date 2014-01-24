@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,12 +7,10 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\Db\Sql\Ddl\Constraint;
 
 use Zend\Db\Sql\ExpressionInterface;
 
-interface ConstraintInterface extends ExpressionInterface
-{
-    public function getColumns();
+interface ConstraintInterface extends ExpressionInterface {
+	public function getColumns();
 }

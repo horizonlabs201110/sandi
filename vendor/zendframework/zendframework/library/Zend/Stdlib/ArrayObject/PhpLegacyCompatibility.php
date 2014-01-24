@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,7 +7,6 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\Stdlib\ArrayObject;
 
 use ArrayObject as PhpArrayObject;
@@ -19,17 +19,15 @@ use ArrayObject as PhpArrayObject;
  * simply extends the PHP ArrayObject implementation, and provides default
  * behavior in the constructor.
  */
-abstract class PhpLegacyCompatibility extends PhpArrayObject
-{
-    /**
-     * Constructor
-     *
-     * @param array  $input
-     * @param int    $flags
-     * @param string $iteratorClass
-     */
-    public function __construct($input = array(), $flags = self::STD_PROP_LIST, $iteratorClass = 'ArrayIterator')
-    {
-        parent::__construct($input, $flags, $iteratorClass);
-    }
+abstract class PhpLegacyCompatibility extends PhpArrayObject {
+	/**
+	 * Constructor
+	 *
+	 * @param array $input        	
+	 * @param int $flags        	
+	 * @param string $iteratorClass        	
+	 */
+	public function __construct($input = array(), $flags = self::STD_PROP_LIST, $iteratorClass = 'ArrayIterator') {
+		parent::__construct ( $input, $flags, $iteratorClass );
+	}
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,11 +7,9 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\Db\Sql\Predicate;
 
-class NotIn extends In
-{
-    protected $selectSpecification = '%s NOT IN %s';
-    protected $valueSpecSpecification = '%%s NOT IN (%s)';
+class NotIn extends In {
+	protected $selectSpecification = '%s NOT IN %s';
+	protected $valueSpecSpecification = '%%s NOT IN (%s)';
 }

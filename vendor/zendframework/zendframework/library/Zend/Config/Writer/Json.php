@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,21 +7,18 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\Config\Writer;
 
 use Zend\Json\Json as JsonFormat;
 
-class Json extends AbstractWriter
-{
-    /**
-     * processConfig(): defined by AbstractWriter.
-     *
-     * @param  array $config
-     * @return string
-     */
-    public function processConfig(array $config)
-    {
-        return JsonFormat::encode($config);
-    }
+class Json extends AbstractWriter {
+	/**
+	 * processConfig(): defined by AbstractWriter.
+	 *
+	 * @param array $config        	
+	 * @return string
+	 */
+	public function processConfig(array $config) {
+		return JsonFormat::encode ( $config );
+	}
 }

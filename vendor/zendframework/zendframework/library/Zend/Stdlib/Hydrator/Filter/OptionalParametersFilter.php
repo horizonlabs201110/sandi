@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -16,39 +17,34 @@ use ReflectionParameter;
 /**
  * Filter that includes methods which have no parameters or only optional parameters
  */
-class OptionalParametersFilter implements FilterInterface
-{
-    /**
-     * Map of methods already analyzed
-     * by {@see \Zend\Stdlib\Hydrator\Filter\OptionalParametersFilter::filter()},
-     * cached for performance reasons
-     *
-     * @var bool[]
-     */
-    private static $propertiesCache = array();
-
-    /**
-     * {@inheritDoc}
-     */
-    public function filter($property)
-    {
-        if (isset(self::$propertiesCache[$property])) {
-            return self::$propertiesCache[$property];
-        }
-
-        try {
-            $reflectionMethod = new ReflectionMethod($property);
-        } catch (ReflectionException $exception) {
-            throw new InvalidArgumentException(sprintf('Method %s doesn\'t exist', $property));
-        }
-
-        $mandatoryParameters = array_filter(
-            $reflectionMethod->getParameters(),
-            function (ReflectionParameter $parameter) {
-                return ! $parameter->isOptional();
-            }
-        );
-
-        return self::$propertiesCache[$property] = empty($mandatoryParameters);
-    }
+class OptionalParametersFilter implements FilterInterface {
+	/**
+	 * Map of methods already analyzed
+	 * by {@see \Zend\Stdlib\Hydrator\Filter\OptionalParametersFilter::filter()},
+	 * cached for performance reasons
+	 *
+	 * @var bool[]
+	 */
+	private static $propertiesCache = array ();
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public function filter($property) {
+		if (isset ( self::$propertiesCache [$property] )) {
+			return self::$propertiesCache [$property];
+		}
+		
+		try {
+			$reflectionMethod = new ReflectionMethod ( $property );
+		} catch ( ReflectionException $exception ) {
+			throw new InvalidArgumentException ( sprintf ( 'Method %s doesn\'t exist', $property ) );
+		}
+		
+		$mandatoryParameters = array_filter ( $reflectionMethod->getParameters (), function (ReflectionParameter $parameter) {
+			return ! $parameter->isOptional ();
+		} );
+		
+		return self::$propertiesCache [$property] = empty ( $mandatoryParameters );
+	}
 }

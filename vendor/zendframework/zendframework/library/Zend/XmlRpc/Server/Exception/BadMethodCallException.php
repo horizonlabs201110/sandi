@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,11 +7,9 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\XmlRpc\Server\Exception;
 
 use Zend\XmlRpc\Exception;
 
-class BadMethodCallException extends Exception\BadMethodCallException implements ExceptionInterface
-{
+class BadMethodCallException extends Exception\BadMethodCallException implements ExceptionInterface {
 }

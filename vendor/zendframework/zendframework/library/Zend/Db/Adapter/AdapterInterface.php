@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,7 +7,6 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\Db\Adapter;
 
 /**
@@ -14,16 +14,16 @@ namespace Zend\Db\Adapter;
  * @property Driver\DriverInterface $driver
  * @property Platform\PlatformInterface $platform
  */
-interface AdapterInterface
-{
-    /**
-     * @return Driver\DriverInterface
-     */
-    public function getDriver();
-
-    /**
-     * @return Platform\PlatformInterface
-     */
-    public function getPlatform();
-
+interface AdapterInterface {
+	/**
+	 *
+	 * @return Driver\DriverInterface
+	 */
+	public function getDriver();
+	
+	/**
+	 *
+	 * @return Platform\PlatformInterface
+	 */
+	public function getPlatform();
 }

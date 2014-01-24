@@ -1,14 +1,8 @@
 <?php
 
 /*
- * This file is part of the Assetic package, an OpenSky project.
- *
- * (c) 2010-2013 OpenSky Project Inc
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * This file is part of the Assetic package, an OpenSky project. (c) 2010-2013 OpenSky Project Inc For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
-
 namespace Assetic\Filter;
 
 use Assetic\Asset\AssetInterface;
@@ -18,19 +12,20 @@ use Assetic\Asset\AssetInterface;
  *
  * @author Kris Wallsmith <kris.wallsmith@gmail.com>
  */
-interface FilterInterface
-{
-    /**
-     * Filters an asset after it has been loaded.
-     *
-     * @param AssetInterface $asset An asset
-     */
-    public function filterLoad(AssetInterface $asset);
-
-    /**
-     * Filters an asset just before it's dumped.
-     *
-     * @param AssetInterface $asset An asset
-     */
-    public function filterDump(AssetInterface $asset);
+interface FilterInterface {
+	/**
+	 * Filters an asset after it has been loaded.
+	 *
+	 * @param AssetInterface $asset
+	 *        	An asset
+	 */
+	public function filterLoad(AssetInterface $asset);
+	
+	/**
+	 * Filters an asset just before it's dumped.
+	 *
+	 * @param AssetInterface $asset
+	 *        	An asset
+	 */
+	public function filterDump(AssetInterface $asset);
 }

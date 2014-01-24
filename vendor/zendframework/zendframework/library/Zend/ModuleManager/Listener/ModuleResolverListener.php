@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,7 +7,6 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\ModuleManager\Listener;
 
 use Zend\ModuleManager\ModuleEvent;
@@ -14,22 +14,21 @@ use Zend\ModuleManager\ModuleEvent;
 /**
  * Module resolver listener
  */
-class ModuleResolverListener extends AbstractListener
-{
-    /**
-     * @param  ModuleEvent $e
-     * @return object|false False if module class does not exist
-     */
-    public function __invoke(ModuleEvent $e)
-    {
-        $moduleName = $e->getModuleName();
-        $class      = $moduleName . '\Module';
-
-        if (!class_exists($class)) {
-            return false;
-        }
-
-        $module = new $class;
-        return $module;
-    }
+class ModuleResolverListener extends AbstractListener {
+	/**
+	 *
+	 * @param ModuleEvent $e        	
+	 * @return object false if module class does not exist
+	 */
+	public function __invoke(ModuleEvent $e) {
+		$moduleName = $e->getModuleName ();
+		$class = $moduleName . '\Module';
+		
+		if (! class_exists ( $class )) {
+			return false;
+		}
+		
+		$module = new $class ();
+		return $module;
+	}
 }

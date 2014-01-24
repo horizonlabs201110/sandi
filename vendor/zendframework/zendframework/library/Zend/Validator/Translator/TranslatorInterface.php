@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,16 +7,15 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\Validator\Translator;
 
-interface TranslatorInterface
-{
-    /**
-     * @param  string $message
-     * @param  string $textDomain
-     * @param  string $locale
-     * @return string
-     */
-    public function translate($message, $textDomain = 'default', $locale = null);
+interface TranslatorInterface {
+	/**
+	 *
+	 * @param string $message        	
+	 * @param string $textDomain        	
+	 * @param string $locale        	
+	 * @return string
+	 */
+	public function translate($message, $textDomain = 'default', $locale = null);
 }

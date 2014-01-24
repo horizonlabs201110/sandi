@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,28 +7,26 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\ServiceManager;
 
 /**
  * Service locator interface
  */
-interface ServiceLocatorInterface
-{
-    /**
-     * Retrieve a registered instance
-     *
-     * @param  string  $name
-     * @throws Exception\ServiceNotFoundException
-     * @return object|array
-     */
-    public function get($name);
-
-    /**
-     * Check for a registered instance
-     *
-     * @param  string|array  $name
-     * @return bool
-     */
-    public function has($name);
+interface ServiceLocatorInterface {
+	/**
+	 * Retrieve a registered instance
+	 *
+	 * @param string $name        	
+	 * @throws Exception\ServiceNotFoundException
+	 * @return object array
+	 */
+	public function get($name);
+	
+	/**
+	 * Check for a registered instance
+	 *
+	 * @param string|array $name        	
+	 * @return bool
+	 */
+	public function has($name);
 }

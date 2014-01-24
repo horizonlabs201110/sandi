@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,17 +7,17 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\Di;
 
-interface LocatorInterface
-{
-    /**
-     * Retrieve a class instance
-     *
-     * @param  string      $name   Class name or service name
-     * @param  null|array  $params Parameters to be used when instantiating a new instance of $name
-     * @return object|null
-     */
-    public function get($name, array $params = array());
+interface LocatorInterface {
+	/**
+	 * Retrieve a class instance
+	 *
+	 * @param string $name
+	 *        	Class name or service name
+	 * @param null|array $params
+	 *        	Parameters to be used when instantiating a new instance of $name
+	 * @return object null
+	 */
+	public function get($name, array $params = array());
 }

@@ -1,205 +1,200 @@
-<?php 
-//$local = new Zend_Locale();
-//ini_set('default_charset','gb2312');
+<?php
 use Zend\Session\Container;
-$sessionUser = new Container('user');
+$sessionUser = new Container ( 'user' );
 
-$purchaseFlag = ($grant[0]['grant_bitmap'] >> 1) & 1;
-$printFlag = ($grant[0]['grant_bitmap'] >> 2) & 1;
-$downloadFlag = ($grant[0]['grant_bitmap'] >> 3) & 1;
+$purchaseFlag = ($grant [0] ['grant_bitmap'] >> 1) & 1;
+$printFlag = ($grant [0] ['grant_bitmap'] >> 2) & 1;
+$downloadFlag = ($grant [0] ['grant_bitmap'] >> 3) & 1;
 ?>
 
 <html>
 <head>
-    <title>3D</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php
-    echo $this->headLink()->prependStylesheet($this->basePath() . '/bootstrap/css/bootstrap.min.css');
-    echo $this->headLink()->prependStylesheet($this->basePath() . '/css/style.css');	
+echo $this->headLink ()->prependStylesheet ( $this->basePath () . '/bootstrap/css/bootstrap.min.css' );
+echo $this->headLink ()->prependStylesheet ( $this->basePath () . '/css/style.css' );
 ?>	
 </head>
 <body>
-<div style="height:120px;text-align:center;font-size: 20px;">
-    3D  Logo
-</div>
-<div class="container">
-    <nav class="navbar navbar-default" role="navigation">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href = "/sandi/index">Homepage</a>
-        </div>
+	<div style="height: 120px; text-align: center; font-size: 20px;">3D
+		Logo</div>
+	<div class="container">
+		<nav class="navbar navbar-default" role="navigation">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/sandi/index">Homepage</a>
+			</div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href = "/sandi/index/1">Handicraft</a></li>
-                <li><a href = "/sandi/index/2">Artist</a></li>
-				<li><a href = "/sandi/index/3">ee</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <form class="navbar-form navbar-left" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="src/html/cart.html"><i class="glyphicon glyphicon-shopping-cart"></i></a></li>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="/sandi/index/1">Handicraft</a></li>
+					<li><a href="/sandi/index/2">Artist</a></li>
+					<li><a href="/sandi/index/3">ee</a></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Action</a></li>
+							<li><a href="#">Another action</a></li>
+							<li><a href="#">Something else here</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Separated link</a></li>
+							<li class="divider"></li>
+							<li><a href="#">One more separated link</a></li>
+						</ul></li>
+				</ul>
+				<form class="navbar-form navbar-left" role="search">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Search">
+					</div>
+					<button type="submit" class="btn btn-default">Submit</button>
+				</form>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="src/html/cart.html"><i
+							class="glyphicon glyphicon-shopping-cart"></i></a></li>
 				<?php
-				if ($sessionUser->name != NULL)
-				{
-				?>	
+				if ($sessionUser->name != NULL) {
+					?>	
 					<li><b>welcome: <?php echo $sessionUser->name?></b></li>
-					<li><a href = "/sandi/upload-model">upload model</a></li>
-					<li><a href = "/user/index/<?php echo $sessionUser->user_id ?>">My Information</a></li>
-					<li><a href = "/user/logout">Log out</a></li>
-				<?php 
-				}
-				else
-				{?>
-					<li><a href = "/user/login">log in </a></li> 
-					<li><a href = "/user/add">sign up</a> </li>
-				<?php 
+					<li><a href="/sandi/upload-model">upload model</a></li>
+					<li><a href="/user/index/<?php echo $sessionUser->user_id ?>">My
+							Information</a></li>
+					<li><a href="/user/logout">Log out</a></li>
+				<?php
+				} else {
+					?>
+					<li><a href="/user/login">log in </a></li>
+					<li><a href="/user/add">sign up</a></li>
+				<?php
 				}
 				?>
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </nav>
-</div>
+			</div>
+			<!-- /.navbar-collapse -->
+		</nav>
+	</div>
 
-<div class="container">
+	<div class="container">
 
-    <div class="row row-offcanvas row-offcanvas-right">
+		<div class="row row-offcanvas row-offcanvas-right">
 
-        <div class="col-sm-6 col-md-3">
-            <div class="thumbnail">
-                <h5><?php echo $this->escapeHtml($model[0]["model_id"]);?></h5>
-                <img data-src="holder.js/240x200" alt="..." src="<?php echo $this->basePath(). '/img/pro.jpg' ;?>">
-                <div class="caption">
-                    <h3 <?php echo $this->escapeHtml($model[0]["profile"]);?></h3>
-                    <p>...</p>
-                    <p class="frome-text">Frome:$77.00</p>
-					<p>
-					<?php
-						if ($purchaseFlag == 4) 
-						{
-							echo "已购买";
-						}
-						else
-						{
-								if ($printFlag == 1) 
-								{
-					?>
-									<a href="<?php echo $this->url('sandi', array('action'=>'modelPrint', 'id' => $model->model_id));?>">Print model</a>
-					<?php 
-								}
-								
-								if ($downloadFlag == 1) 
-								{
-					?>
-									<a href="<?php echo $this->url('sandi', array('action'=>'modelDownload', 'id' => $model->model_id));?>">Download model</a>
-					<?php 
-								}					
-								
-						}
-					?>
-					
-					</p>
-                </div>
-            </div>
-        </div>
-		<div>
-			<span class="glyphicon glyphicon-star"><?php echo "purchaseFlag ". $purchaseFlag; ?></span>
-			<span class="glyphicon glyphicon-star"><?php echo "printFlag " .$printFlag; ?></span>
-			<span class="glyphicon glyphicon-star"><?php echo "downloadFlag " . $downloadFlag; ?></span>
-		</div>
-        <div class="col-xs-6 col-sm-4 sidebar-offcanvas cart-list" id="sidebar" role="navigation">
+			<div class="col-sm-6 col-md-3">
+				<div class="thumbnail">
+					<img data-src="holder.js/200x200" alt="..."	src="<?php echo $this->url('sandi', array('action'=>'showPrincipalModelImage', 'id' =>$model[0]["model_id"]));?>" />
+					<p><?php echo $this->escapeHtml($model[0]["profile"]);?></p>
+					<p>价格: <?php echo $this->escapeHtml($offer[0]["contents"]);?> 元</p>
+				</div>
+			</div>
+			<div>
+				<span class="glyphicon glyphicon-star"><?php echo "purchaseFlag ". $purchaseFlag; ?></span>
+				<span class="glyphicon glyphicon-star"><?php echo "printFlag " .$printFlag; ?></span>
+				<span class="glyphicon glyphicon-star"><?php echo "downloadFlag " . $downloadFlag; ?></span>
+			</div>
+			<div class="col-xs-6 col-sm-4 sidebar-offcanvas cart-list"
+				id="sidebar" role="navigation">
 			<?php if ($sessionUser->user_id == $model[0]["owner_id"]) {?>
-			<a href="<?php echo $this->url('sandi', array('action'=>'edit', 'id' => $model[0]["model_id"]));?>">编辑模型</a>
-			<?php 
-			}
-			else
-			{?>
-			<h>------- </h>
-			<?php 
+			<a
+					href="<?php echo $this->url('sandi', array('action'=>'edit', 'id' => $model[0]["model_id"]));?>">编辑模型</a>
+				<a
+					href="<?php echo $this->url('sandi', array('action'=>'modelManage', 'id' => $model[0]["model_id"]));?>">管理模型</a>
+			<?php
+			} else {
+				?>
+			<h>
+				<?php
+					if ($hasPurchased == true) {?>
+						<a href="<?php echo $this->url('sandi', array('action'=>'downloadModel', 'id' => $offer[0]["offer_id"]));?>"> 下载模型</a>
+					<?php
+					} else {
+						if ($printFlag == 1) {
+							?>
+									<a
+								href="<?php echo $this->url('sandi', array('action'=>'purchaseModel', 'id' => $offer[0]["offer_id"], 'subaction' => 4));?>">购买打印权</a>
+					<?php
+						}
+						
+						if ($downloadFlag == 1) {
+							?>
+									<a
+								href="<?php echo $this->url('sandi', array('action'=>'purchaseModel', 'id' => $offer[0]["offer_id"], 'subaction' => 8));?>">购买下载权</a>
+					<?php
+						}
+					}
+				?>
+			</h>
+			<?php
 			}
 			?>	
         </div>
-    </div>
-</div>
+		</div>
+	</div>
 
-<div class="container">
-    <p>Related Model</p>
-    <div class="row">
-        <div class="col-sm-6 col-md-3">
-            <div class="thumbnail">
-                <h5>title</h5>
-                <img data-src="holder.js/240x200" alt="..." src="src/img/pro.jpg">
-                <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p>
-                    <p class="frome-text">Frome:$77.00</p>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span href="#" class="glyphicon glyphicon-star-empty"></span>
-                    <span href="#" class="glyphicon glyphicon-star-empty"></span>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-3">
-            <div class="thumbnail">
-                <h5>title</h5>
-                <img data-src="holder.js/240x200" alt="..." src="src/img/pro.jpg">
-                <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p> <p class="frome-text">Frome:$77.00</p>                         <span class="glyphicon glyphicon-star"></span>                         <span class="glyphicon glyphicon-star"></span>                         <span class="glyphicon glyphicon-star"></span>                         <span href="#" class="glyphicon glyphicon-star-empty"></span>                         <span href="#" class="glyphicon glyphicon-star-empty"></span></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <ul class="pagination pagination-lg">
-        <li class="disabled" ><a href="#">&laquo;</a></li>
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">&raquo;</a></li>
-    </ul>
-</div>
+	<div class="container">
+		<p>Related Model</p>
+		<div class="row">
+			<div class="col-sm-6 col-md-3">
+				<div class="thumbnail">
+					<h5>title</h5>
+					<img data-src="holder.js/240x200" alt="..." src="src/img/pro.jpg">
+					<div class="caption">
+						<h3>Thumbnail label</h3>
+						<p>...</p>
+						<p>
+						
+						
+						<p class="frome-text">Frome:$77.00</p>
+						<span class="glyphicon glyphicon-star"></span> <span
+							class="glyphicon glyphicon-star"></span> <span
+							class="glyphicon glyphicon-star"></span> <span href="#"
+							class="glyphicon glyphicon-star-empty"></span> <span href="#"
+							class="glyphicon glyphicon-star-empty"></span>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6 col-md-3">
+				<div class="thumbnail">
+					<h5>title</h5>
+					<img data-src="holder.js/240x200" alt="..." src="src/img/pro.jpg">
+					<div class="caption">
+						<h3>Thumbnail label</h3>
+						<p>...</p>
+						<p>
+						
+						
+						<p class="frome-text">Frome:$77.00</p>
+						<span class="glyphicon glyphicon-star"></span> <span
+							class="glyphicon glyphicon-star"></span> <span
+							class="glyphicon glyphicon-star"></span> <span href="#"
+							class="glyphicon glyphicon-star-empty"></span> <span href="#"
+							class="glyphicon glyphicon-star-empty"></span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<ul class="pagination pagination-lg">
+			<li class="disabled"><a href="#">&laquo;</a></li>
+			<li class="active"><a href="#">1</a></li>
+			<li><a href="#">2</a></li>
+			<li><a href="#">3</a></li>
+			<li><a href="#">4</a></li>
+			<li><a href="#">5</a></li>
+			<li><a href="#">&raquo;</a></li>
+		</ul>
+	</div>
 
-<hr>
-<div id="wrap">
-    <div id="footer">
-        <div class="container">
-            <p class="text-muted credit">Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a> and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.</p>
-        </div>
-    </div>
-</div>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="../assets/jquery.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="../bootstrap/js/bootstrap.min.js"></script>
+	<hr>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="../assets/jquery.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="../bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,7 +7,6 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\Loader;
 
 use Traversable;
@@ -14,29 +14,28 @@ use Traversable;
 /**
  * Plugin class locator interface
  */
-interface PluginClassLocator extends ShortNameLocator, \IteratorAggregate
-{
-    /**
-     * Register a class to a given short name
-     *
-     * @param  string $shortName
-     * @param  string $className
-     * @return PluginClassLocator
-     */
-    public function registerPlugin($shortName, $className);
-
-    /**
-     * Unregister a short name lookup
-     *
-     * @param  mixed $shortName
-     * @return void
-     */
-    public function unregisterPlugin($shortName);
-
-    /**
-     * Get a list of all registered plugins
-     *
-     * @return array|Traversable
-     */
-    public function getRegisteredPlugins();
+interface PluginClassLocator extends ShortNameLocator, \IteratorAggregate {
+	/**
+	 * Register a class to a given short name
+	 *
+	 * @param string $shortName        	
+	 * @param string $className        	
+	 * @return PluginClassLocator
+	 */
+	public function registerPlugin($shortName, $className);
+	
+	/**
+	 * Unregister a short name lookup
+	 *
+	 * @param mixed $shortName        	
+	 * @return void
+	 */
+	public function unregisterPlugin($shortName);
+	
+	/**
+	 * Get a list of all registered plugins
+	 *
+	 * @return array Traversable
+	 */
+	public function getRegisteredPlugins();
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,7 +7,6 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\Mail\Transport\Exception;
 
 use Zend\Mail\Exception;
@@ -14,6 +14,5 @@ use Zend\Mail\Exception;
 /**
  * Exception for Zend\Mail component.
  */
-class InvalidArgumentException extends Exception\InvalidArgumentException implements
-    ExceptionInterface
-{}
+class InvalidArgumentException extends Exception\InvalidArgumentException implements ExceptionInterface {
+}

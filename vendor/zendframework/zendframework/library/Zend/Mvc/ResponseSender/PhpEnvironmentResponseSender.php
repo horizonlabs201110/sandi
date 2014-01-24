@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,30 +7,26 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\Mvc\ResponseSender;
 
 use Zend\Http\PhpEnvironment\Response;
 use Zend\Mvc\ResponseSender\SendResponseEvent;
 
-class PhpEnvironmentResponseSender extends HttpResponseSender
-{
-    /**
-     * Send php environment response
-     *
-     * @param  SendResponseEvent $event
-     * @return PhpEnvironmentResponseSender
-     */
-    public function __invoke(SendResponseEvent $event)
-    {
-        $response = $event->getResponse();
-        if (!$response instanceof Response) {
-            return $this;
-        }
-
-        $this->sendHeaders($event)
-             ->sendContent($event);
-        $event->stopPropagation(true);
-        return $this;
-    }
+class PhpEnvironmentResponseSender extends HttpResponseSender {
+	/**
+	 * Send php environment response
+	 *
+	 * @param SendResponseEvent $event        	
+	 * @return PhpEnvironmentResponseSender
+	 */
+	public function __invoke(SendResponseEvent $event) {
+		$response = $event->getResponse ();
+		if (! $response instanceof Response) {
+			return $this;
+		}
+		
+		$this->sendHeaders ( $event )->sendContent ( $event );
+		$event->stopPropagation ( true );
+		return $this;
+	}
 }

@@ -1,14 +1,8 @@
 <?php
 
 /*
- * This file is part of the Assetic package, an OpenSky project.
- *
- * (c) 2010-2013 OpenSky Project Inc
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * This file is part of the Assetic package, an OpenSky project. (c) 2010-2013 OpenSky Project Inc For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
-
 namespace Assetic;
 
 /**
@@ -18,12 +12,11 @@ namespace Assetic;
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-interface ValueSupplierInterface
-{
-    /**
-     * Returns a map of values.
-     *
-     * @return array
-     */
-    public function getValues();
+interface ValueSupplierInterface {
+	/**
+	 * Returns a map of values.
+	 *
+	 * @return array
+	 */
+	public function getValues();
 }

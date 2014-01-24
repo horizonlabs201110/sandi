@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,25 +7,23 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\Mvc;
 
 use Zend\EventManager\EventInterface as Event;
 
-interface InjectApplicationEventInterface
-{
-    /**
-     * Compose an Event
-     *
-     * @param  Event $event
-     * @return void
-     */
-    public function setEvent(Event $event);
-
-    /**
-     * Retrieve the composed event
-     *
-     * @return Event
-     */
-    public function getEvent();
+interface InjectApplicationEventInterface {
+	/**
+	 * Compose an Event
+	 *
+	 * @param Event $event        	
+	 * @return void
+	 */
+	public function setEvent(Event $event);
+	
+	/**
+	 * Retrieve the composed event
+	 *
+	 * @return Event
+	 */
+	public function getEvent();
 }

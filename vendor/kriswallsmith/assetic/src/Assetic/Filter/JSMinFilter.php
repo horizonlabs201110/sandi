@@ -1,14 +1,8 @@
 <?php
 
 /*
- * This file is part of the Assetic package, an OpenSky project.
- *
- * (c) 2010-2013 OpenSky Project Inc
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * This file is part of the Assetic package, an OpenSky project. (c) 2010-2013 OpenSky Project Inc For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
  */
-
 namespace Assetic\Filter;
 
 use Assetic\Asset\AssetInterface;
@@ -21,14 +15,10 @@ use Assetic\Asset\AssetInterface;
  * @link https://raw.github.com/mrclay/minify/master/min/lib/JSMin.php
  * @author Brunoais <brunoaiss@gmail.com>
  */
-class JSMinFilter implements FilterInterface
-{
-    public function filterLoad(AssetInterface $asset)
-    {
-    }
-
-    public function filterDump(AssetInterface $asset)
-    {
-        $asset->setContent(\JSMin::minify($asset->getContent()));
-    }
+class JSMinFilter implements FilterInterface {
+	public function filterLoad(AssetInterface $asset) {
+	}
+	public function filterDump(AssetInterface $asset) {
+		$asset->setContent ( \JSMin::minify ( $asset->getContent () ) );
+	}
 }

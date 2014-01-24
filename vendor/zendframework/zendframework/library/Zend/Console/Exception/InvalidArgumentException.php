@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,9 +7,7 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\Console\Exception;
 
-class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
-{
+class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface {
 }

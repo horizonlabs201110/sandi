@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,7 +7,6 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\Form\Annotation;
 
 /**
@@ -24,15 +24,13 @@ namespace Zend\Form\Annotation;
  *
  * @Annotation
  */
-class Validator extends AbstractArrayAnnotation
-{
-    /**
-     * Retrieve the validator specification
-     *
-     * @return null|array
-     */
-    public function getValidator()
-    {
-        return $this->value;
-    }
+class Validator extends AbstractArrayAnnotation {
+	/**
+	 * Retrieve the validator specification
+	 *
+	 * @return null array
+	 */
+	public function getValidator() {
+		return $this->value;
+	}
 }

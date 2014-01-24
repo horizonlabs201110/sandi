@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,19 +7,17 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\Navigation\Service;
 
 /**
  * Default navigation factory.
  */
-class DefaultNavigationFactory extends AbstractNavigationFactory
-{
-    /**
-     * @return string
-     */
-    protected function getName()
-    {
-        return 'default';
-    }
+class DefaultNavigationFactory extends AbstractNavigationFactory {
+	/**
+	 *
+	 * @return string
+	 */
+	protected function getName() {
+		return 'default';
+	}
 }

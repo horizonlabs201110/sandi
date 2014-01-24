@@ -4,7 +4,7 @@ return array(
     'modules' => array(
 		'AssetManager',
 	    'Application',
-		//'Album',   // <-- Add this line
+		'WebinoImageThumb',
 		'Sandi',
     ),
 

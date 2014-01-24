@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,7 +7,6 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\Di\Definition\Annotation;
 
 use Zend\Code\Annotation\AnnotationInterface;
@@ -14,18 +14,17 @@ use Zend\Code\Annotation\AnnotationInterface;
 /**
  * Annotation for instantiator
  */
-class Instantiator implements AnnotationInterface
-{
-    /**
-     * @var mixed
-     */
-    protected $content = null;
-
-    /**
-     * {@inheritDoc}
-     */
-    public function initialize($content)
-    {
-        $this->content = $content;
-    }
+class Instantiator implements AnnotationInterface {
+	/**
+	 *
+	 * @var mixed
+	 */
+	protected $content = null;
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public function initialize($content) {
+		$this->content = $content;
+	}
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,15 +7,13 @@
  * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\View\Renderer;
 
-interface TreeRendererInterface
-{
-    /**
-     * Indicate whether the renderer is capable of rendering trees of view models
-     *
-     * @return bool
-     */
-    public function canRenderTrees();
+interface TreeRendererInterface {
+	/**
+	 * Indicate whether the renderer is capable of rendering trees of view models
+	 *
+	 * @return bool
+	 */
+	public function canRenderTrees();
 }
