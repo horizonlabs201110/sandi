@@ -1456,7 +1456,7 @@ output {
 
 .form-control {
 	display: block;
-	width: 100%;
+	width: 400px;
 	height: 34px;
 	padding: 6px 12px;
 	font-size: 14px;
@@ -1956,7 +1956,7 @@ textarea.input-lg {
 
 .btn-block {
 	display: block;
-	width: 100%;
+	width: 400px;
 	padding-left: 0;
 	padding-right: 0;
 }
@@ -1967,7 +1967,7 @@ textarea.input-lg {
 
 input[type="submit"].btn-block,input[type="reset"].btn-block,input[type="button"].btn-block
 	{
-	width: 100%;
+	width: 300px;
 }
 
 @font-face {

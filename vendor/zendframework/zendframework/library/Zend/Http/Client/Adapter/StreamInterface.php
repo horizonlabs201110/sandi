@@ -1,12 +1,12 @@
 <?php
-
 /**
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace Zend\Http\Client\Adapter;
 
 /**
@@ -14,15 +14,15 @@ namespace Zend\Http\Client\Adapter;
  *
  * This interface describes Zend\Http\Client\Adapter which supports streaming.
  */
-interface StreamInterface {
-	/**
-	 * Set output stream
-	 *
-	 * This function sets output stream where the result will be stored.
-	 *
-	 * @param resource $stream
-	 *        	Stream to write the output to
-	 *        	
-	 */
-	public function setOutputStream($stream);
+interface StreamInterface
+{
+    /**
+     * Set output stream
+     *
+     * This function sets output stream where the result will be stored.
+     *
+     * @param resource $stream Stream to write the output to
+     *
+     */
+    public function setOutputStream($stream);
 }

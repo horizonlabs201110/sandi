@@ -1,86 +1,111 @@
 <?php
-
 /**
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace Zend\Code\Generator\DocBlock\Tag;
 
-use Zend\Code\Generator\DocBlock\Tag;
-use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionDocBlockTag;
+use Zend\Code\Generator\AbstractGenerator;
+use Zend\Code\Generator\DocBlock\TagManager;
+use Zend\Code\Reflection\DocBlock\Tag\TagInterface as ReflectionTagInterface;
 
-class AuthorTag extends Tag {
-	/**
-	 *
-	 * @var string
-	 */
-	protected $datatype = null;
-	
-	/**
-	 *
-	 * @var string
-	 */
-	protected $paramName = null;
-	
-	/**
-	 *
-	 * @param ReflectionDocBlockTag $reflectionTagParam        	
-	 * @return AuthorTag
-	 */
-	public static function fromReflection(ReflectionDocBlockTag $reflectionTagParam) {
-		$authorTag = new self ();
-		$authorTag->setName ( 'author' )->setAuthorName ( $reflectionTagParam->getType () )->		// @todo rename
-		setAuthorEmail ( $reflectionTagParam->getVariableName () )->setDescription ( $reflectionTagParam->getDescription () );
-		
-		return $authorTag;
-	}
-	
-	/**
-	 *
-	 * @param string $datatype        	
-	 * @return AuthorTag
-	 */
-	public function setDatatype($datatype) {
-		$this->datatype = ( string ) $datatype;
-		return $this;
-	}
-	
-	/**
-	 *
-	 * @return string
-	 */
-	public function getDatatype() {
-		return $this->datatype;
-	}
-	
-	/**
-	 *
-	 * @param string $paramName        	
-	 * @return AuthorTag
-	 */
-	public function setParamName($paramName) {
-		$this->paramName = ( string ) $paramName;
-		return $this;
-	}
-	
-	/**
-	 *
-	 * @return string
-	 */
-	public function getParamName() {
-		return $this->paramName;
-	}
-	
-	/**
-	 *
-	 * @return string
-	 */
-	public function generate() {
-		$output = '@param ' . (($this->datatype != null) ? $this->datatype : 'unknown') . (($this->paramName != null) ? ' $' . $this->paramName : '') . (($this->description != null) ? ' ' . $this->description : '');
-		
-		return $output;
-	}
+class AuthorTag extends AbstractGenerator implements TagInterface
+{
+    /**
+     * @var string
+     */
+    protected $authorName = null;
+
+    /**
+     * @var string
+     */
+    protected $authorEmail = null;
+
+    /**
+     * @param string $authorName
+     * @param string $authorEmail
+     */
+    public function __construct($authorName = null, $authorEmail = null)
+    {
+        if (!empty($authorName)) {
+            $this->setAuthorName($authorName);
+        }
+
+        if (!empty($authorEmail)) {
+            $this->setAuthorEmail($authorEmail);
+        }
+    }
+
+    /**
+     * @param ReflectionTagInterface $reflectionTag
+     * @return ReturnTag
+     * @deprecated Deprecated in 2.3. Use TagManager::createTagFromReflection() instead
+     */
+    public static function fromReflection(ReflectionTagInterface $reflectionTag)
+    {
+        $tagManager = new TagManager();
+        $tagManager->initializeDefaultTags();
+        return $tagManager->createTagFromReflection($reflectionTag);
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'author';
+    }
+
+    /**
+     * @param string $authorEmail
+     * @return AuthorTag
+     */
+    public function setAuthorEmail($authorEmail)
+    {
+        $this->authorEmail = $authorEmail;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthorEmail()
+    {
+        return $this->authorEmail;
+    }
+
+    /**
+     * @param string $authorName
+     * @return AuthorTag
+     */
+    public function setAuthorName($authorName)
+    {
+        $this->authorName = $authorName;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthorName()
+    {
+        return $this->authorName;
+    }
+
+    /**
+     * @return string
+     */
+    public function generate()
+    {
+        $output = '@author'
+            . ((!empty($this->authorName)) ? ' ' . $this->authorName : '')
+            . ((!empty($this->authorEmail)) ? ' <' . $this->authorEmail . '>' : '');
+
+        return $output;
+    }
+
 }

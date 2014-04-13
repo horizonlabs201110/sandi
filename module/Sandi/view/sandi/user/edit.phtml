@@ -7,116 +7,80 @@ $userID = $sessionUser->user_id;
 $title =  "修改用户信息";
 ?>
 
-
 <html>
-<title><?php echo $title?></title>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<?php
-echo $this->headLink ()->prependStylesheet ( $this->basePath () . '/bootstrap/css/bootstrap.min.css' );
-echo $this->headLink ()->prependStylesheet ( $this->basePath () . '/css/style.css' );
-?>	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<?php 
+		echo $this->headLink ()->prependStylesheet ( $this->basePath () . '/bootstrap/css/bootstrap.min.css' );
+		echo $this->headLink ()->prependStylesheet ( $this->basePath () . '/css/style.css' );
+	?>
 </head>
-<body>
-
-	<div style="height: 120px; text-align: center; font-size: 20px;">3D
-		Logo</div>
+<body  class="login-wrap">
+	<div style="height: 40px; text-align: center; font-size: 60px; color: #0000ff">3 D 打 印 模 型</div>
 	<div class="container">
-		<nav class="navbar navbar-default" role="navigation">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target=".navbar-ex1-collapse">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Brand</a>
-			</div>
-
-			<!-- Collect the nav links, forms, and other content for toggling -->
+		<div>
+			<ul class="nav navbar-nav navbar-right">
+				<?php
+				if ($sessionUser->name != NULL) {
+					?>	
+					<li>欢迎: <?php echo $sessionUser->name?></li>
+					<li><a href="/sandi/upload-model">上传模型</a></li>
+					<li><a href="/user/index/<?php echo $sessionUser->user_id ?>">我的信息</a></li>
+					<li><a href="/user/logout">退出</a></li>
+				<?php
+				} else {
+					?>
+					<li><a href="/user/login">登录</a></li>
+					<li><a href="/user/add">注册</a></li>
+				<?php
+				}
+				?>
+	        </ul>
+		</div>
+	</div>
+	<div class="container">
+		<nav class="navbar navbar-default">
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="/sandi/index/1">Handicraft</a></li>
-					<li><a href="/sandi/index/2">Artist</a></li>
-					<li><a href="/sandi/index/3">ee</a></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Another action</a></li>
-							<li><a href="#">Something else here</a></li>
-							<li class="divider"></li>
-							<li><a href="#">Separated link</a></li>
-							<li class="divider"></li>
-							<li><a href="#">One more separated link</a></li>
-						</ul></li>
+					<?php 
+					foreach ( $category as $column => $categoryData):
+						echo '<li><a href="/sandi/index/' . $categoryData->category_id . '">' . $categoryData->title . "</a></li>" ;
+					endforeach;
+					?>
 				</ul>
-				<form class="navbar-form navbar-left" role="search">
+				<form class="navbar-form navbar-left">
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="Search">
 					</div>
 					<button type="submit" class="btn btn-default">Submit</button>
 				</form>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="src/html/cart.html"><i
-							class="glyphicon glyphicon-shopping-cart"></i></a></li>
-				<?php
-				if ($sessionUser->name != NULL) {
-					?>	
-					<li><b>welcome: <?php echo $sessionUser->name?></b></li>
-					<li><a href="/sandi/upload-model">upload model</a></li>
-					<li><a href="/user/index/<?php echo $sessionUser->user_id ?>">My
-							Information</a></li>
-					<li><a href="/user/logout">Log out</a></li>
-				<?php
-				} else {
-					?>
-					<li><a href="/user/login">log in </a></li>
-					<li><a href="/user/add">sign up</a></li>
-				<?php
-				}
-				?>
-            </ul>
 			</div>
 		</nav>
 	</div>
-
+	<br>
+	
 	<div class="container">
 		<h2 class="form-signin-heading">修改用户信息</h2>	
-<?php
-$form = $this->form;
-$form->setAttribute ( 'action', 		
-					$this->url ( 'user', array (
-						'action' => 'edit',
-						'id' => $userID 
-					)
-		 ));
-$form->prepare ();
-
-echo $this->form ()->openTag ( $form );
-echo $this->formHidden ( $form->get ( 'user_id' ) ) . "<br><br>";
-echo $this->formRow ( $form->get ( 'alias' ) ) . "<br><br>";
-//echo $this->formRow ( $form->get ( 'password' ) ) . "<br><br>";
-//echo $this->formRow ( $form->get ( 'user_account' ) ) . "<br><br>";
-// echo $this->formHidden($form->get('last_login')). "<br><br>";
-// echo $this->formHidden($form->get('status')). "<br><br>";
-echo $this->formRow ( $form->get ( 'profile' ) ) . "<br><br>";
-echo $this->formSubmit ( $form->get ( 'submit' ) ) . "<br><br>";
-?>
-
-</div>
-	<hr>
-	<div id="wrap">
-		<div id="footer">
-			<div class="container">
-				<p class="text-muted credit">
-					Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a>
-					and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.
-				</p>
-			</div>
-		</div>
-	</div>
+		<?php
+			$form = $this->form;
+			$form->setAttribute ( 'action', 		
+								$this->url ( 'user', array (
+									'action' => 'edit',
+									'id' => $userID 
+								)
+					 ));
+			$form->prepare ();
+			
+			echo $this->form ()->openTag ( $form );
+			echo $this->formHidden ( $form->get ( 'user_id' ) ) . "<br><br>";
+			echo $this->formRow ( $form->get ( 'alias' ) ) . "<br><br>";
+			//echo $this->formRow ( $form->get ( 'password' ) ) . "<br><br>";
+			//echo $this->formRow ( $form->get ( 'user_account' ) ) . "<br><br>";
+			// echo $this->formHidden($form->get('last_login')). "<br><br>";
+			// echo $this->formHidden($form->get('status')). "<br><br>";
+			echo $this->formRow ( $form->get ( 'profile' ) ) . "<br><br>";
+			echo $this->formSubmit ( $form->get ( 'submit' ) ) . "<br><br>";
+		?>
 </body>
 </html>
 

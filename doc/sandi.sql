@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 24, 2014 at 09:10 PM
+-- Generation Time: Apr 10, 2014 at 09:01 AM
 -- Server version: 5.5.15
--- PHP Version: 5.4.21
+-- PHP Version: 5.5.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -58,9 +58,14 @@ CREATE TABLE IF NOT EXISTS `t_category` (
 --
 
 INSERT INTO `t_category` (`category_id`, `category_name`, `parent_id`, `visibility`, `descript`, `title`) VALUES
-(1, '工艺品', 0, 1, NULL, '工艺品'),
-(2, '汽车', 0, 1, '汽车模型', '汽车模型'),
-(3, '飞机', 0, 1, '飞机模型', '飞机模型');
+(1, '艺术', 0, 1, '艺术', '艺术'),
+(2, '时尚', 0, 1, '时尚', '时尚'),
+(3, '家居', 0, 1, '家居', '家居'),
+(4, '小物件', 0, 1, '小物件', '小物件'),
+(5, '游戏', 0, 1, '游戏', '游戏'),
+(6, '珠宝', 0, 1, '珠宝', '珠宝'),
+(7, 'Maker/DIY', 0, 1, 'Maker/DIY', 'Maker/DIY'),
+(8, 'Miniatures', 0, 1, 'Miniatures', 'Miniatures');
 
 -- --------------------------------------------------------
 
@@ -74,10 +79,8 @@ CREATE TABLE IF NOT EXISTS `t_grant` (
   `grant_bitmap` tinyint(1) NOT NULL COMMENT '1 - 1- 1 - 1(downlaod-print-purchase-browse)',
   PRIMARY KEY (`grand_id`),
   KEY `model_id` (`model_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
 
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `t_model`
@@ -91,8 +94,7 @@ CREATE TABLE IF NOT EXISTS `t_model` (
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`model_id`),
   KEY `owner_id` (`owner_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
-
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
 
 -- --------------------------------------------------------
 
@@ -137,9 +139,7 @@ CREATE TABLE IF NOT EXISTS `t_model_file` (
   `file_type` tinyint(11) NOT NULL,
   `upload_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
-
-
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=50 ;
 
 -- --------------------------------------------------------
 
@@ -238,7 +238,7 @@ CREATE TABLE IF NOT EXISTS `t_offer` (
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`offer_id`),
   KEY `model_id` (`model_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
 
 -- --------------------------------------------------------
 
@@ -255,7 +255,7 @@ CREATE TABLE IF NOT EXISTS `t_purchase` (
   PRIMARY KEY (`id`),
   KEY `customer_id` (`customer_id`),
   KEY `offer_id` (`offer_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 -- --------------------------------------------------------
 
@@ -290,7 +290,7 @@ CREATE TABLE IF NOT EXISTS `t_user` (
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `UserAccount` (`user_account`),
   KEY `alias` (`alias`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='用户表' AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='用户表' AUTO_INCREMENT=10 ;
 
 -- --------------------------------------------------------
 

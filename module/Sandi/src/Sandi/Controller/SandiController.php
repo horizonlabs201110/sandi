@@ -12,17 +12,15 @@ use Zend\Db\Sql\Select;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Paginator\Adapter\DbSelect;
 use Zend\Paginator\Paginator;
+use Zend\Filter\Compress;
+
 use Sandi\Model\Model;
 use Sandi\Model\ModelFile;
 use Sandi\Form\UploadModelForm;
 use Sandi\Form\ModelImageFileUploadForm;
 use Sandi\Form\ModelProjectFileUploadForm;
-use Zend\Filter\Null;
-use Zend\Validator\File\Size;
 
-use Zend\Filter\Compress;
 
-use Sandi\src\Sandi\Util\TestClass;
 
 class SandiController extends AbstractActionController {
 
@@ -42,15 +40,18 @@ class SandiController extends AbstractActionController {
 // 		));
 // 		$compressed = $filter->filter('d:/qqq.txt');
 		
-		
-		
 		$category_id = ( int ) $this->params ()->fromRoute ( 'id', 0 );
 		if (! $category_id) {
-			$category_id = 0;
+			$category_id = 1;
 		}
 		
+		//Get all category information 
+		$category = $this->getModelCategoryTable()->fetchAll();
+		
+		
 		$paginated = true;
-		if ($paginated) {
+		if ($paginated) 
+		{
 			
 			// create a new Select object
 			$select = new Select ();
@@ -79,11 +80,16 @@ class SandiController extends AbstractActionController {
 			$paginator->setCurrentPageNumber ( ( int ) $this->params ()->fromQuery ( 'page', 1 ) );
 			// set the number of items per page to 10
 			$paginator->setItemCountPerPage ( 20 );
-		} else {
+		}
+		else 
+		{
 			$paginator = $this->getModelByCategory ( $category_id );
 		}
 		
-		return new ViewModel ( array ('paginator' => $paginator ) );
+		return new ViewModel ( array (
+				'paginator' => $paginator,
+				'category' => $category	 
+		) );
 	}
 	
 	
@@ -94,6 +100,8 @@ class SandiController extends AbstractActionController {
 					'action' => 'uploadModel' 
 			) );
 		}
+		
+		$category = $this->getModelCategoryTable()->fetchAll();		
 		
 		// Get the model details with the specified id. An exception is thrown
 		// if it cannot be found, in which case go to the index page.
@@ -194,7 +202,8 @@ class SandiController extends AbstractActionController {
 		
 		return array (
 				'id' => $model_id,
-				'form' => $form 
+				'form' => $form,
+				'category' => $category
 		);
 	}
 	
@@ -206,6 +215,8 @@ class SandiController extends AbstractActionController {
 		}
 		
 		$form = new UploadModelForm ( 'upload-form' );
+		
+		$category = $this->getModelCategoryTable()->fetchAll();
 		$form->categoryData = $this->getModelCategoryTable()->fetchAll();
 		$form->addCategory ();
 		
@@ -282,7 +293,8 @@ class SandiController extends AbstractActionController {
 		}
 		
 		return array (
-				'form' => $form 
+				'form' => $form,
+				'category' => $category
 		);
 	}
 	
@@ -338,13 +350,21 @@ class SandiController extends AbstractActionController {
 				$uploadPath = $this->getFileUploadLocation ();
 				
 				$uploadPath = $uploadPath . '/' . $model_id;
+				
+				
 				if (! file_exists ( $uploadPath )) {
+					mkdir ( $uploadPath, 0777 );
+					$uploadPath = $uploadPath . '/img';
 					mkdir ( $uploadPath, 0777 );
 				}
 				
-				$uploadPath = $uploadPath . '/img';
-				if (! file_exists ( $uploadPath )) {
-					mkdir ( $uploadPath, 0777 );
+				else 
+				{
+					$uploadPath = $uploadPath . '/img';
+					if (file_exists ( $uploadPath ))
+				   {
+				   		$this->delFilesUnderDir($uploadPath);
+				   }
 				}
 				
 				// Save Uploaded file
@@ -357,6 +377,10 @@ class SandiController extends AbstractActionController {
 					
 					// generate thumbnail image
 					$tn_img = $this->generateThumbnail ( $name_2312, $model_id );
+					
+					
+					//delete old model image file 2014-04-05
+					$this->getModelFileTable ()-> deleteModelFileByModelId($model_id, 1);
 						
 					// save model file into db
 					$modelFile = new ModelFile ();
@@ -370,11 +394,13 @@ class SandiController extends AbstractActionController {
 			}
 		}
 		
+		$category = $this->getModelCategoryTable()->fetchAll();
 		$modelImages = $this->getModelFileTable ()->getModelFile ( $model_id, 1 );
 		return array (
 				'form' => $form,
 				'model_id' => $model_id,
-				'modelImageFiles' => $modelImages 
+				'modelImageFiles' => $modelImages,
+				'category' => $category
 		);
 	}
 	
@@ -432,9 +458,12 @@ class SandiController extends AbstractActionController {
 			}
 		}
 		
+		$category = $this->getModelCategoryTable()->fetchAll();
+		
 		return array (
 				'form' => $form,
-				'model_id' => $model_id 
+				'model_id' => $model_id,
+				'category' => $category
 		)
 		;
 	}
@@ -446,7 +475,8 @@ class SandiController extends AbstractActionController {
 		$thumbnailFileName = 'tn_' . $imageFileName;
 		$imageThumb = $this->getServiceLocator ()->get ( 'WebinoImageThumb' );
 		$thumb = $imageThumb->create ( $sourceImageFileName, $options = array () );
-		$thumb->resize ( 75, 75 );
+		//$thumb->resize ( 240, 200 );
+		$thumb->adaptiveResize(240, 200);
 		$thumb->save ( $path . '/' . $model_id . '/img/' . $thumbnailFileName );
 		return $thumbnailFileName;
 	}
@@ -497,6 +527,8 @@ class SandiController extends AbstractActionController {
 		$imageName = iconv("UTF-8", "GB2312", $imageName);		//need converting the encode of image file's name from charset 
 																//utf-8 to gb2312, otherwise it will be corrupted
 																//character and cannot be returned to web client.
+																
+		//$imageName = substr($imageName, 2);
 		
 		// Fetch Configuration from Module Config
 		$filePath = $this->getFileUploadLocation ();
@@ -546,6 +578,42 @@ class SandiController extends AbstractActionController {
 		$response->setContent ( $file );
 		return $response;
 	}
+	
+	
+	
+	
+	public function showBiggerModelImageAction()
+	{
+		$modelId	= $this->params()->fromRoute('id');			//model id
+		$imgArray	= $this->getBiggerModelmageFiles($modelId);
+	
+		// Fetch Configuration from Module Config
+		$filePath = $this->getFileUploadLocation ();
+	
+		if(count($imgArray) > 0)
+		{
+			$imageName = $imgArray[0];
+			$imagePath = "$filePath/$modelId/img/$imageName";
+		}
+		else
+		{
+			$imageName = "pro.jpg";
+			$imagePath = "$filePath/$imageName";
+		}
+	
+	
+	
+		$file = file_get_contents($imagePath);
+	
+		// Directly return the Response
+		$response = $this->getEvent()->getResponse();
+		$response->getHeaders()->addHeaders ( array (
+				'Content-Type' => 'application/octet-stream',
+				'Content-Disposition' => "attachment;filename=$imageName"
+		) );
+		$response->setContent ( $file );
+		return $response;
+	}	
 
 	
 	public function informAction() {
@@ -564,6 +632,9 @@ class SandiController extends AbstractActionController {
 					'action' => 'index' 
 			) );
 		}
+		
+		
+		$category = $this->getModelCategoryTable()->fetchAll();
 		
 		// Get the model details with the specified id. An exception is thrown
 		// if it cannot be found, in which case go to the index page.
@@ -591,7 +662,8 @@ class SandiController extends AbstractActionController {
 					'model' => $model,
 					'grant' => $grant,
 			 		'offer' => $offer,
-					'hasPurchased' => $bHasPurchased
+					'hasPurchased' => $bHasPurchased,
+					'category' => $category
 			) );
 		} catch ( \Exception $ex ) {
 			return $this->redirect ()->toRoute ( 'home', array (
@@ -708,7 +780,7 @@ class SandiController extends AbstractActionController {
 		}
 		
 		$dest = "$dest/$model_id";
-		if (! file_exists ( $dest ))
+		if (!file_exists ( $dest ))
 		{
 			mkdir ( $dest, 0777 );
 		}
@@ -783,7 +855,7 @@ class SandiController extends AbstractActionController {
 // 			}
 // 			closedir ( $dp );
 // 		}
-		$file = "$model_id.png";
+		$file = $model_id . ".zip";
 		$fileContents = file_get_contents("$zipPath/$file");
 		
 		// Directly return the Response
@@ -974,12 +1046,47 @@ class SandiController extends AbstractActionController {
 	
 		$imageFiles = array ();
 	
-		if (is_dir ( $path )) {
+		if (is_dir ( $path )) 
+		{
 			$dh = opendir ( $path );
-			if ($dh) {
-				while ( ($file = readdir ( $dh )) !== false ) {
-					if ($file != '.' && $file != '..' && strstr ( $file, 'tn_' ) == NULL) {
+			if ($dh) 
+			{
+				while ( ($file = readdir ( $dh )) !== false ) 
+				{
+					if ($file != '.' && $file != '..' &&  strstr ( $file, 'tn_' ) != NULL) 
+					{
+
 						array_push ( $imageFiles, $file );
+						
+					}
+				}
+				closedir ( $dh );
+			}
+		}
+	
+		return $imageFiles;
+	}
+	
+	
+	private function getBiggerModelmageFiles($model_id)
+	{
+		$path = $this->getFileUploadLocation ();
+		$path = "$path/$model_id/img";
+	
+		$imageFiles = array ();
+	
+		if (is_dir ( $path ))
+		{
+			$dh = opendir ( $path );
+			if ($dh)
+			{
+				while ( ($file = readdir ( $dh )) !== false )
+				{
+					if ($file != '.' && $file != '..' &&  strstr ( $file, 'tn_' ) == NULL)
+					{
+	
+						array_push ( $imageFiles, $file );
+	
 					}
 				}
 				closedir ( $dh );
@@ -990,4 +1097,27 @@ class SandiController extends AbstractActionController {
 	}	
 	
 
+	private function delFilesUnderDir($dirName)
+	{
+		if ($handle = opendir( $dirName ))
+		{
+			while ( false != ( $item = readdir( $handle ) ) )
+			{
+				if ( $item != '.' && $item != '..' )
+				{
+					if ( is_dir( "$dirName/$item" ) ) 
+					{
+						delFilesUnderDir( "$dirName/$item" );
+					} 
+					else 
+					{
+						unlink( "$dirName/$item" );
+					}
+				}
+			}
+			
+			closedir($handle);
+		}
+		return 0;
+	}
 }

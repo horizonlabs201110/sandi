@@ -1,24 +1,17 @@
 <?php
-// $local = new Zend_Locale();
-// ini_set('default_charset','gb2312');
 use Zend\Session\Container;
 $sessionUser = new Container ( 'user' );
-// echo $sessionUser->user_id;
-
 ?>
 <html>
 <head>
-<title>3Dģ��</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<?php
-echo $this->headLink ()->prependStylesheet ( $this->basePath () . '/bootstrap/css/bootstrap.min.css' );
-echo $this->headLink ()->prependStylesheet ( $this->basePath () . '/css/style.css' );
-?>	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<?php 
+		echo $this->headLink ()->prependStylesheet ( $this->basePath () . '/bootstrap/css/bootstrap.min.css' );
+		echo $this->headLink ()->prependStylesheet ( $this->basePath () . '/css/style.css' );
+	?>
 </head>
 <body>
-
-	<div style="height: 120px; text-align: center; font-size: 20px;">3D ģ��
-	</div>
+	<div style="height: 120px; text-align: center; font-size: 20px;">3D模型</div>
 	<div class="container">
 		<nav class="navbar navbar-default" role="navigation">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -31,13 +24,33 @@ echo $this->headLink ()->prependStylesheet ( $this->basePath () . '/css/style.cs
 				</button>
 				<a class="navbar-brand" href="#">Brand</a>
 			</div>
-
+			<div>
+					<ul class="nav navbar-nav navbar-right">
+					<li><a href="src/html/cart.html"><i class="glyphicon glyphicon-shopping-cart"></i></a></li>
+					<?php
+					if ($sessionUser->name != NULL) {
+						?>	
+						<li><b>welcome: <?php echo $sessionUser->name?></b></li>
+						<li><a href="/sandi/upload-model">upload model</a></li>
+						<li><a href="/user/index/<?php echo $sessionUser->user_id ?>">My
+								Information</a></li>
+						<li><a href="/user/logout">Log out</a></li>
+					<?php
+					} else {
+						?>
+						<li><a href="/user/login">log in </a></li>
+						<li><a href="/user/add">sign up</a></li>
+					<?php
+					}
+					?>
+	            </ul>
+			</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="/sandi/index/1">Handicraft</a></li>
-					<li><a href="/sandi/index/2">Artist</a></li>
-					<li><a href="/sandi/index/3">ee</a></li>
+					<li class="active"><a href="/sandi/index/1">工艺品</a></li>
+					<li><a href="/sandi/index/2">汽车模型</a></li>
+					<li><a href="/sandi/index/3">飞机模型</a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown">Dropdown <b class="caret"></b></a>
 						<ul class="dropdown-menu">
@@ -56,47 +69,23 @@ echo $this->headLink ()->prependStylesheet ( $this->basePath () . '/css/style.cs
 					</div>
 					<button type="submit" class="btn btn-default">Submit</button>
 				</form>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="src/html/cart.html"><i
-							class="glyphicon glyphicon-shopping-cart"></i></a></li>
-				<?php
-				if ($sessionUser->name != NULL) {
-					?>	
-					<li><b>welcome: <?php echo $sessionUser->name?></b></li>
-					<li><a href="/sandi/upload-model">upload model</a></li>
-					<li><a href="/user/index/<?php echo $sessionUser->user_id ?>">My
-							Information</a></li>
-					<li><a href="/user/logout">Log out</a></li>
-				<?php
-				} else {
-					?>
-					<li><a href="/user/login">log in </a></li>
-					<li><a href="/user/add">sign up</a></li>
-				<?php
-				}
-				?>
-            </ul>
 			</div>
 			<!-- /.navbar-collapse -->
 		</nav>
 	</div>
-
-
 	<div class="container">
 
-<?php
-if ($informID == 1) {
-	?>	
-<h>Upload Model successfully!</h>
-<?php
-}
-if ($informID == 2) {
-	?>
-<h>Modify Model successfully!</h>
-<?php
-}
-?>
-<h1>
-			<a href="/sandi/index">home</a>
-		</h1>
+		<?php
+		if ($informID == 1) {
+			?>	
+		<h>上传模型成功！</h>
+		<?php
+		}
+		if ($informID == 2) {
+			?>
+		<h>修改模型成功！</h>
+		<?php
+		}
+		?>
+		<h1><a href="/sandi/index/1">回到主页</a></h1>
 	</div>

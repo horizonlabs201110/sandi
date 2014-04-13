@@ -18,7 +18,9 @@ use Sandi\Form\UserAvatarForm;
 
 
 class UserController extends AbstractActionController {
+	
 	protected $userTable;
+	protected $categoryTable;
 
 	public function indexAction() {
 		$id = ( int ) $this->params ()->fromRoute ( 'id', 0 );
@@ -41,7 +43,11 @@ class UserController extends AbstractActionController {
 			return $this->redirect()->toRoute( 'user', array ('action' => 'index' ) );
 		}
 		
-		return new ViewModel ( array ('user' => $user ) );
+		
+		$category = $this->getModelCategoryTable()->fetchAll();
+		return new ViewModel ( array ('user' => $user,
+				'category' => $category
+	 			) );
 	}
 	
 	
@@ -49,7 +55,7 @@ class UserController extends AbstractActionController {
 	public function addAction() 
 	{
 		$form = new UserForm();
-		$form->get ( 'submit' )->setValue ( 'Add' );
+		$form->get ( 'submit' )->setValue ( '注册账户' );
 		
 		$request = $this->getRequest();
 		if ($request->isPost()) 
@@ -74,18 +80,6 @@ class UserController extends AbstractActionController {
 				
 				// 3. save file
 				$lastInsertUserID = $this->getUserTable ()->lastInsertValue;
-				
-				
-				
-// 				$data_imgFile = $data ["avatar-file"];
-// 				$name = $data_imgFile ["name"];
-// 				$tmp_name = $data_imgFile ["tmp_name"];
-// 				$savePath = './avatar/' . $lastInsertUserID . '/';
-				
-// 				if (! file_exists ( $savePath )) {
-// 					mkdir ( $savePath, 0777 );
-// 				}
-// 				$ret = move_uploaded_file ( $tmp_name, $savePath . $name );
 				
 				return $this->redirect()->toRoute ( 'user', array (
 							'action' => 'index',
@@ -149,9 +143,11 @@ class UserController extends AbstractActionController {
 			}
 		}
 		
+		$category = $this->getModelCategoryTable()->fetchAll();
 		return array (
 				'id' => $id,
-				'form' => $form 
+				'form' => $form,
+				'category' => $category
 		);
 	}
 	
@@ -283,13 +279,15 @@ class UserController extends AbstractActionController {
 		$user_id = $this->params()->fromRoute('id');			//user id
 
 		$imagePath = $this->getAvartaFile($user_id);
+
 		$file = file_get_contents($imagePath);
+		
 	
 		// Directly return the Response
 		$response = $this->getEvent()->getResponse();
 		$response->getHeaders()->addHeaders ( array (
 				'Content-Type' => 'application/octet-stream',
-				'Content-Disposition' => "attachment;filename=avarta"
+				'Content-Disposition' => "attachment;filename=avarta.png"
 		) );
 		$response->setContent ( $file );
 		return $response;
@@ -297,17 +295,21 @@ class UserController extends AbstractActionController {
 	
 	
 	
-	public function loginAction() {
+	public function loginAction() 
+	{
 		$request = $this->getRequest ();
 		
-		if ($request->isPost ()) {
+		if ($request->isPost ()) 
+		{
 			$user_account = $request->getPost ( 'user_account' );
 			$password = $request->getPost ( 'password' );
 			
 			// if it cannot be found, in which case go to the index page.
-			try {
+			try 
+			{
 				$user = $this->getUserTable ()->getUser ( $user_account );
-				if (! strcmp ( $password, $user->password )) {
+				if (! strcmp ( $password, $user->password )) 
+				{
 					$sessionUser = new Container ( 'user' );
 					$sessionUser->name = $user_account;
 					$sessionUser->alias = $user->alias;
@@ -323,8 +325,7 @@ class UserController extends AbstractActionController {
 							'options' => array (
 									'buffer_results' => true 
 							) 
-					)
-					 );
+					) );
 					
 					$gwOpts = new DbTableGatewayOptions ();
 					$gwOpts->setDataColumn ( 'data' );
@@ -340,8 +341,10 @@ class UserController extends AbstractActionController {
 					Container::setDefaultManager ( $sessionManager );
 					
 					$this->redirect ()->toUrl ( '/sandi/index' );
-				} else {
-					echo "invalide user name or password";
+				} 
+				else 
+				{
+					echo "无效的用户名或密码！";
 					return;
 				}
 			} catch ( \Exception $ex ) 
@@ -353,6 +356,15 @@ class UserController extends AbstractActionController {
 				$this->redirect ()->toUrl ( '/sandi/index' );
 			}
 		}
+		
+		
+		$category = $this->getModelCategoryTable()->fetchAll();
+		
+		return new ViewModel ( array (
+				'category' => $category
+		) );
+		
+		
 	}
 	public function logoutAction() {
 		$sessionUser = new Container ( 'user' );
@@ -402,9 +414,10 @@ class UserController extends AbstractActionController {
 		return $config ['module_config'] ['avatar_location'];
 	}
 
-	private function getAvatarFile($user_id)
+	public function getAvartaFile($user_id)
 	{
 		$path = $this->getAvatarUploadLocation ();
+		
 		$path1 = $path . '/' . $user_id;
 		
 		$imageFiles = null;
@@ -416,7 +429,7 @@ class UserController extends AbstractActionController {
 			{
 				while ( ($file = readdir ( $dh )) !== false ) 
 				{
-					if ($file != '.' && $file != '..' && strstr ( $file, 'va_' ) != NULL) 
+					if ($file != '.' && $file != '..' && strstr ( $file, 'ava_' ) != NULL) 
 					{
 						$imageFiles = "$path1/$file";
 						break;
@@ -458,6 +471,17 @@ class UserController extends AbstractActionController {
 		}
 		
 	}
+	
+	
+	private function getModelCategoryTable()
+	{
+		if (! $this->categoryTable) {
+			$sm = $this->getServiceLocator ();
+			$this->categoryTable = $sm->get ( 'Sandi\Model\ModelCategoryTable' );
+		}
+		return $this->categoryTable;
+	}
+		
 	
 }
 

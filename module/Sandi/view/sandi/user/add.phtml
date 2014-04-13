@@ -1,57 +1,34 @@
-<?php $title = '用户注册';?>
-
-<html lang="zh-cn" class="login-wrap">
+<html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
-
-<title><?php echo $title?></title>
-
-<!-- Bootstrap core CSS -->
-<?php
-echo $this->headLink ()->prependStylesheet ( $this->basePath () . '/bootstrap/css/bootstrap.min.css' );
-echo $this->headLink ()->prependStylesheet ( $this->basePath () . '/css/style.css' );
-?>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<?php 
+		echo $this->headLink ()->prependStylesheet ( $this->basePath () . '/bootstrap/css/bootstrap.min.css' );
+		echo $this->headLink ()->prependStylesheet ( $this->basePath () . '/css/style.css' );
+	?>
 </head>
-
 <body class="login-wrap">
-	<div style="height: 120px; text-align: center; font-size: 40px;">3D
-		Logo</div>
+	<div style="height: 120px; text-align: center; font-size: 40px;">3D	Logo</div>
 	<div class="container">
 		<h2 class="form-signin-heading"><?php echo $this->escapeHtml($title); ?></h2>	
-<?php
-$form = $this->form;
-$form->setAttribute ( 'action', $this->url ( 'user', array (
-		'action' => 'add' 
-) ) );
-$form->prepare ();
+		<?php
+			$form = $this->form;
+			$form->setAttribute ( 'action', $this->url ( 'user', array (
+					'action' => 'add' 
+			) ) );
+			$form->prepare ();
+	
+			echo $this->form ()->openTag ( $form );
+			echo $this->formHidden ( $form->get ( 'user_id' ) );
+			echo $this->formRow ( $form->get ( 'alias' ) ) . '<br>';
+			echo $this->formRow ( $form->get ( 'password' ) ) . '<br>';
+			echo $this->formRow ( $form->get ( 'user_account' ) ) . '<br>';
+			// echo $this->formHidden($form->get('last_login'));
+			// echo $this->formHidden($form->get('status'));
+			echo $this->formRow ( $form->get ( 'profile' ) ). '<br>';
+			echo $this->formSubmit ( $form->get ( 'submit' ) );
+		?>
 
-echo $this->form ()->openTag ( $form );
-echo $this->formHidden ( $form->get ( 'user_id' ) );
-echo $this->formRow ( $form->get ( 'alias' ) );
-echo $this->formRow ( $form->get ( 'password' ) );
-echo $this->formRow ( $form->get ( 'user_account' ) );
-// echo $this->formHidden($form->get('last_login'));
-// echo $this->formHidden($form->get('status'));
-echo $this->formRow ( $form->get ( 'profile' ) );
-
-echo $this->formSubmit ( $form->get ( 'submit' ) );
-?>
-
-</div>
-	<!-- /container -->
-
-	<hr>
-	<div id="wrap">
-		<div id="footer">
-			<div class="container">
-				<p class="text-muted credit">
-					Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a>
-					and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.
-				</p>
-			</div>
-		</div>
 	</div>
 </body>
 </html>

@@ -6,7 +6,6 @@ use Zend\Form\Form;
 
 class UserForm extends Form {
 	public function __construct($name = null) {
-		// we want to ignore the name passed
 		parent::__construct ( 'user' );
 		$this->setAttribute ( 'method', 'post' );
 		
@@ -21,7 +20,11 @@ class UserForm extends Form {
 				'attributes' => array (
 						'class' => 'form-control',
 						'placeholder' => 'user_account' 
-				) 
+				) ,
+				
+				'options' => array(
+						'label' => '帐号：',
+				),	
 		) );
 		
 		$this->add ( array (
@@ -30,7 +33,11 @@ class UserForm extends Form {
 				'attributes' => array (
 						'class' => 'form-control',
 						'placeholder' => 'alias' 
-				) 
+				),
+				
+				'options' => array(
+						'label' => '昵称：',
+				),				
 		) );
 		
 		$this->add ( array (
@@ -42,7 +49,7 @@ class UserForm extends Form {
 				),
 				
 				'options' => array(
-				'label' => 'password',
+				'label' => '密码：',
 				 ),
 				
 		) );
@@ -64,7 +71,11 @@ class UserForm extends Form {
 				'attributes' => array (
 						'class' => 'form-control',
 						'placeholder' => 'profile'
-				)
+				),
+				
+				'options' => array(
+						'label' => '简介：',
+				),	
 		) );		
 		
 		

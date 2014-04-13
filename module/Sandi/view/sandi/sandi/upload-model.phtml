@@ -1,133 +1,92 @@
 <?php
-// ini_set('default_charset','gbk');
-use Zend\Session\Container;
-$sessionUser = new Container ( 'user' );
-
+	use Zend\Session\Container;
+	$sessionUser = new Container ( 'user' );
 ?>
-
-
-
-
 <html>
 <head>
-<title>3D</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-  
-<?php
-echo $this->headLink ()->prependStylesheet ( $this->basePath () . '/bootstrap/css/bootstrap.min.css' );
-echo $this->headLink ()->prependStylesheet ( $this->basePath () . '/css/style.css' );
-?>	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<?php 
+		echo $this->headLink ()->prependStylesheet ( $this->basePath () . '/bootstrap/css/bootstrap.min.css' );
+		echo $this->headLink ()->prependStylesheet ( $this->basePath () . '/css/style.css' );
+	?>
 </head>
 <body>
-
-	<div style="height: 120px; text-align: center; font-size: 20px;">3D
-		Logo</div>
+	<div style="height: 40px; text-align: center; font-size: 60px; color: #0000ff">3 D 打 印 模 型</div>
 	<div class="container">
-		<nav class="navbar navbar-default" role="navigation">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target=".navbar-ex1-collapse">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Brand</a>
-			</div>
-
-			<!-- Collect the nav links, forms, and other content for toggling -->
+		<div>
+			<ul class="nav navbar-nav navbar-right">
+				<?php
+				if ($sessionUser->name != NULL) {
+				?>	
+					<li>欢迎: <?php echo $sessionUser->name?></li>
+					<li><a href="/sandi/upload-model">上传模型</a></li>
+					<li><a href="/user/index/<?php echo $sessionUser->user_id ?>">我的信息</a></li>
+					<li><a href="/user/logout">退出</a></li>
+				<?php
+				} 
+				else 
+				{
+				?>
+					<li><a href="/user/login">登录</a></li>
+					<li><a href="/user/add">注册</a></li>
+				<?php
+				}
+				?>
+	        </ul>
+		</div>
+	</div>
+	<div class="container">
+		<nav class="navbar navbar-default">
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="/sandi/index/1">Handicraft</a></li>
-					<li><a href="/sandi/index/2">Artist</a></li>
-					<li><a href="/sandi/index/3">ee</a></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Another action</a></li>
-							<li><a href="#">Something else here</a></li>
-							<li class="divider"></li>
-							<li><a href="#">Separated link</a></li>
-							<li class="divider"></li>
-							<li><a href="#">One more separated link</a></li>
-						</ul></li>
+					<?php 
+					foreach ( $category as $column => $categoryData):
+						echo '<li><a href="/sandi/index/' . $categoryData->category_id . '">' . $categoryData->title . "</a></li>" ;
+					endforeach;
+					?>
 				</ul>
-				<form class="navbar-form navbar-left" role="search">
+				<form class="navbar-form navbar-left">
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="Search">
 					</div>
 					<button type="submit" class="btn btn-default">Submit</button>
 				</form>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="src/html/cart.html"><i
-							class="glyphicon glyphicon-shopping-cart"></i></a></li>
-				<?php
-				if ($sessionUser->name != NULL) {
-					?>	
-					<li><b>welcome: <?php echo $sessionUser->name?></b></li>
-					<li><a href="/sandi/upload-model">upload model</a></li>
-					<li><a href="/user/index/<?php echo $sessionUser->user_id ?>">My
-							Information</a></li>
-					<li><a href="/user/logout">Log out</a></li>
-				<?php
-				} else {
-					?>
-					<li><a href="/user/login">log in </a></li>
-					<li><a href="/user/add">sign up</a></li>
-				<?php
-				}
-				?>
-            </ul>
 			</div>
-			<!-- /.navbar-collapse -->
 		</nav>
 	</div>
-
-	<div class="container">
-<?php $form->prepare(); // The correct enctype is set here ?>
-<?php echo $this->form()->openTag($form); ?>
-
-    <div class="form-element">
-		<?php echo $this->formHidden($form->get('model_id')); ?>
-		<?php echo $this->formHidden($form->get('user_id')); ?>
-		<?php echo utf8_decode($this->formRow($form->get('profile'))); ?>
-		<?php echo $this->formRow($form->get('price')); ?><br>
-			<br>	
-		<?php echo $this->formRow($form->get('offer')); ?><br>
-			<br>			
-		<?php echo $this->formRow($form->get('category')); ?><br>
-			<br>
-        <?php //$fileElement = $form->get('image-file'); ?>
-        <?php //echo $this->formLabel($fileElement); ?>
-        <?php //echo $this->formFile($fileElement); ?>
-        <?php //echo $this->formElementErrors($fileElement); ?><br>
-			<br>
-		</div>
-		<button>Submit</button>
-
-<?php echo $this->form()->closeTag(); ?>
-</div>
-
-	<div>
-		<a href="/sandi/upload-model-file/">upload model file</a>
-	</div>
-
-	<br>
-	<h3>Upload Notes</h3>
-	<ul>
-		<li>The maximum file size for uploads in this demo is <strong>5 MB</strong>
-			(default file size is unlimited).
-		</li>
-		<li>Only image and 3D files (<strong>JPG, GIF, PNG,3D Files</strong>)
-			are allowed..
-		</li>
-		<li>Uploaded files will be deleted automatically after <strong>5
-				minutes</strong> (demo setting).
-		</li>
-	</ul>
-
+	
+	<table>
+		<tr height = 50>
+			<td span=3><b>上传模型分三步：</b> 1. 填写模型基本信息  &nbsp&nbsp&nbsp 2. 上传模型图片文件&nbsp&nbsp&nbsp 3. 上传模型工程文件</td>
+		</tr>	
+		<tr>
+			<td height=300>
+				<?php 	
+					$form = $this->form;
+					$form->setAttribute ( 'action', $this->url ( 'sandi', array (
+							'action' => 'uploadModel'
+					) ) );
+					$form->prepare();
+					echo $this->form()-> openTag( $form ); 
+				?>
+				    <div class="form-element">
+						<?php echo $this->formHidden($form->get('model_id')); ?>
+						<?php echo $this->formHidden($form->get('user_id')); ?>
+						<?php echo $this->formRow($form->get('profile')); ?><br>
+						<?php echo $this->formRow($form->get('price')); ?><br>
+						<?php echo $this->formRow($form->get('offer')); ?><br>
+						<?php echo $this->formRow($form->get('category')); ?><br>
+				        <?php //echo utf8_decode($this->formRow($form->get('profile'))); ?>
+				        
+				        <?php echo $this->formSubmit ( $form->get ( 'submit' ) );?>
+					</div>
+					
+	
+					<?php echo $this->form()->closeTag(); ?>
+			</td>
+			<td></td>
+			<td></td>
+		</tr>	
+	</table>
 </body>
 </html>

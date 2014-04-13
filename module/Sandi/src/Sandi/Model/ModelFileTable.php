@@ -34,6 +34,16 @@ class ModelFileTable {
 		) );
 		return $resultSet;
 	}
+	
+	public function deleteModelFileByModelId($model_id, $file_type) {
+		$this->tableGateway->delete ( array (
+				'model_id' => $model_id,
+				'file_type' => $file_type
+				
+		) );
+		return ;
+	}
+	
 }
 
 

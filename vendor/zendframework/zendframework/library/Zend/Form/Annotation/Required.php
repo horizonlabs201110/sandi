@@ -1,12 +1,12 @@
 <?php
-
 /**
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
+
 namespace Zend\Form\Annotation;
 
 use Zend\Filter\Boolean as BooleanFilter;
@@ -21,39 +21,41 @@ use Zend\Filter\Boolean as BooleanFilter;
  *
  * @Annotation
  */
-class Required {
-	/**
-	 *
-	 * @var bool
-	 */
-	protected $required = true;
-	
-	/**
-	 * Receive and process the contents of an annotation
-	 *
-	 * @param array $data        	
-	 */
-	public function __construct(array $data) {
-		if (! isset ( $data ['value'] )) {
-			$data ['value'] = false;
-		}
-		
-		$required = $data ['value'];
-		
-		if (! is_bool ( $required )) {
-			$filter = new BooleanFilter ();
-			$required = $filter->filter ( $required );
-		}
-		
-		$this->required = $required;
-	}
-	
-	/**
-	 * Get value of required flag
-	 *
-	 * @return bool
-	 */
-	public function getRequired() {
-		return $this->required;
-	}
+class Required
+{
+    /**
+     * @var bool
+     */
+    protected $required = true;
+
+    /**
+     * Receive and process the contents of an annotation
+     *
+     * @param  array $data
+     */
+    public function __construct(array $data)
+    {
+        if (!isset($data['value'])) {
+            $data['value'] = false;
+        }
+
+        $required = $data['value'];
+
+        if (!is_bool($required)) {
+            $filter   = new BooleanFilter();
+            $required = $filter->filter($required);
+        }
+
+        $this->required = $required;
+    }
+
+    /**
+     * Get value of required flag
+     *
+     * @return bool
+     */
+    public function getRequired()
+    {
+        return $this->required;
+    }
 }
