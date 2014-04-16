@@ -80,15 +80,19 @@ class UserController extends AbstractActionController {
 				
 				// 3. save file
 				$lastInsertUserID = $this->getUserTable ()->lastInsertValue;
+				$sessionUser->user_id = $lastInsertUserID;
 				
 				return $this->redirect()->toRoute ( 'user', array (
 							'action' => 'index',
 							'id' =>$lastInsertUserID
 					) );
-
 			}
 		}
-		return array ( 'form' => $form 	);
+		
+		$category = $this->getModelCategoryTable()->fetchAll();
+		
+		return array ( 'form' => $form,
+					'category' => $category );
 	}
 	
 	
