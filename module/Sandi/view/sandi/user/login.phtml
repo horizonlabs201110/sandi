@@ -1,7 +1,11 @@
 <?php
-$url = $this->url ( 'user', array (
-		'action' => 'login' 
-) );
+
+	use Zend\Session\Container;
+	$sessionUser = new Container ( 'user' );
+	
+	$url = $this->url ( 'user', array (
+			'action' => 'login' 
+	) );
 ?>
 
 <html>
