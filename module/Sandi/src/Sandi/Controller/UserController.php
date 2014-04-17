@@ -259,7 +259,12 @@ class UserController extends AbstractActionController {
 			}
 		}
 
-		return new ViewModel ( array ('form' => $form ) );		
+		$category = $this->getModelCategoryTable()->fetchAll();
+		
+		return array ( 'form' => $form,
+				'category' => $category );
+		
+		//return new ViewModel ( array ('form' => $form ) );		
 		
 	}
 	
