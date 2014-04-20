@@ -4,6 +4,8 @@ namespace Sandi;
 
 use Sandi\Model\Model;
 use Sandi\Model\ModelTable;
+use Sandi\Model\ModelFlag;
+use Sandi\Model\ModelFlagTable;
 use Sandi\Model\ModelFlagMapping;
 use Sandi\Model\ModelFlagMappingTable;
 use Sandi\Model\ModelFile;
@@ -47,6 +49,19 @@ class Module {
 							$resultSetPrototype->setArrayObjectPrototype ( new Model () );
 							return new TableGateway ( 't_model', $dbAdapter, null, $resultSetPrototype );
 						},
+						
+						'Sandi\Model\ModelFlagTable' => function ($sm) {
+							$tableGateway = $sm->get ( 'ModelFlagTableGateway' );
+							$table = new ModelFlagTable ( $tableGateway );
+							return $table;
+						},
+						'ModelFlagTableGateway' => function ($sm) {
+							$dbAdapter = $sm->get ( 'Zend\Db\Adapter\Adapter' );
+							$resultSetPrototype = new ResultSet ();
+							$resultSetPrototype->setArrayObjectPrototype ( new ModelFlag () );
+							return new TableGateway ( 't_model_flag', $dbAdapter, null, $resultSetPrototype );
+						},						
+						
 						'Sandi\Model\ModelFlagMappingTable' => function ($sm) {
 							$tableGateway = $sm->get ( 'ModelFlagMappingTableGateway' );
 							$table = new ModelFlagMappingTable ( $tableGateway );

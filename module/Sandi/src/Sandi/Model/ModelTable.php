@@ -4,26 +4,35 @@ namespace Sandi\Model;
 
 use Zend\Db\TableGateway\TableGateway;
 
-class ModelTable {
+class ModelTable 
+{
 	protected $tableGateway;
 	public $lastInsertValue;
-	public function __construct(TableGateway $tableGateway) {
+	
+	public function __construct(TableGateway $tableGateway) 
+	{
 		$this->tableGateway = $tableGateway;
 	}
-	public function fetchAll() {
+	
+	public function fetchAll() 
+	{
 		$resultSet = $this->tableGateway->select ();
 		return $resultSet;
 	}
-	public function getModel($model_id) {
+	
+	public function getModel($model_id) 
+	{
 		$rowset = $this->tableGateway->select ( array (
 				'model_id' => $model_id 
 		) );
 		$row = $rowset->current ();
-		if (! $row) {
+		if (! $row) 
+		{
 			throw new \Exception ( "Could not find row '" . $model_id . "'" );
 		}
 		return $row;
 	}
+	
 	public function saveModel(Model $model) {
 		$data = array (
 				'designer_id' => $model->designer_id,
@@ -33,30 +42,68 @@ class ModelTable {
 		;
 		
 		$model_id = ( int ) $model->model_id;
-		if ($model_id == 0) {
+		if ($model_id == 0) 
+		{
 			$this->tableGateway->insert ( $data );
 			
 			// get last insert id number
 			$this->lastInsertValue = $this->tableGateway->LastInsertValue;
-		} else {
-			if ($this->getModel ( $model_id )) {
+		} 
+		else 
+		{
+			if ($this->getModel ( $model_id )) 
+			{
 				$this->tableGateway->update ( $data, array (
 						'model_id' => $model_id 
 				) );
-			} else {
+			} 
+			else 
+			{
 				throw new \Exception ( '3d-model id does not exist' );
 			}
 		}
 	}
-	public function deleteModel($model_id) {
+	public function deleteModel($model_id) 
+	{
 		$this->tableGateway->delete ( array (
 				'model_id' => $model_id 
 		) );
 	}
 }
 
+
 // Define processes to t_model_flag_mapping table
-class ModelFlagMappingTable {
+class ModelFlagTable
+{
+	protected $tableGateway;
+	public $lastInsertValue;
+	
+	public function __construct(TableGateway $tableGateway) 
+	{
+		$this->tableGateway = $tableGateway;
+	}
+	
+	public function saveModelFlag($flag_name) 
+	{
+		$data = array (
+				'flag_name' => $flag_name
+		);
+		
+		//if ($model_id == 0)
+		{
+			$this->tableGateway->insert ( $data );
+				
+			// get last insert id number
+			$this->lastInsertValue = $this->tableGateway->LastInsertValue;
+		}
+	}	
+
+}
+
+
+// Define processes to t_model_flag_mapping table
+class ModelFlagMappingTable 
+{
 	protected $tableGateway;
 	public function __construct(TableGateway $tableGateway) {
 		$this->tableGateway = $tableGateway;

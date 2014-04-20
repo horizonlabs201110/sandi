@@ -26,6 +26,7 @@ class SandiController extends AbstractActionController {
 
 	protected $modelTable;
 	protected $modelFileTable;
+	protected $modelFlagTable;
 	protected $modelFlagMappingTable;
 	protected $categoryTable;
 
@@ -93,9 +94,12 @@ class SandiController extends AbstractActionController {
 	}
 	
 	
-	public function editAction() {
+	public function editAction() 
+	{
 		$model_id = ( int ) $this->params ()->fromRoute ( 'id', 0 );
-		if (! $model_id) {
+		
+		if (! $model_id) 
+		{
 			return $this->redirect ()->toRoute ( 'sandi', array (
 					'action' => 'uploadModel' 
 			) );
@@ -105,9 +109,12 @@ class SandiController extends AbstractActionController {
 		
 		// Get the model details with the specified id. An exception is thrown
 		// if it cannot be found, in which case go to the index page.
-		try {
+		try
+		{
 			$model = $this->getModelTable ()->getModel ( $model_id );
-		} catch ( \Exception $ex ) {
+		} 
+		catch ( \Exception $ex ) 
+		{
 			return $this->redirect ()->toRoute ( 'sandi', array (
 					'action' => 'index' 
 			) );
@@ -120,7 +127,7 @@ class SandiController extends AbstractActionController {
 		$form->categoryData = $this->getModelCategoryTable ()->fetchAll ();
 		$form->addCategory ();
 		
-		$form->get ( 'submit' )->setAttribute ( 'value', 'Edit' );
+		$form->get ( 'submit' )->setAttribute ( 'value', '确定' );
 		
 		$request = $this->getRequest ();
 		if ($request->isPost ()) {
@@ -200,6 +207,8 @@ class SandiController extends AbstractActionController {
 			}
 		}
 		
+		$offer = $this->getOffer ( $model_id );
+		$form->get ( 'price' )->setAttribute ( 'value', $offer[0]['contents'] );
 		return array (
 				'id' => $model_id,
 				'form' => $form,
@@ -216,7 +225,6 @@ class SandiController extends AbstractActionController {
 		
 		$form = new UploadModelForm ( 'upload-form' );
 		
-		$category = $this->getModelCategoryTable()->fetchAll();
 		$form->categoryData = $this->getModelCategoryTable()->fetchAll();
 		$form->addCategory ();
 		
@@ -241,6 +249,8 @@ class SandiController extends AbstractActionController {
 				$lastInsertModelID = $this->getModelTable ()->lastInsertValue;
 				$price = $data ["price"];
 				$offer = $data ["offer"];
+				
+				
 				
 				// 2. save offer data
 				if ($price != NULL) {
@@ -285,6 +295,33 @@ class SandiController extends AbstractActionController {
 				$insertString = $sql->getSqlStringForSqlObject ( $insert );
 				$results = $adapter->query ( $insertString, $adapter::QUERY_MODE_EXECUTE );
 				
+				
+				// 5. save customed tag data
+				$tag = $data ["tag"];
+				if($tag != NULL)
+				{
+					$tagArr = split(';', $tag);
+					
+					foreach ($tagArr as $tagname)
+					{
+// 						$sql = new Sql ( $adapter );
+// 						$insert = $sql->insert ();
+// 						$insert->into ( 't_model_flag' );
+// 						$insert->values ( array (
+// 								'flag_name' => $tagname
+// 						) );
+						
+// 						$insertString = $sql->getSqlStringForSqlObject ( $insert );
+// 						$results = $adapter->query ( $insertString, $adapter::QUERY_MODE_EXECUTE );
+						
+						$this->getModelFlagTable ()->saveModelFlag ( $tagname );
+						$lastInsertFlagID = $this->getModelFlagTable ()->lastInsertValue;
+						$this->getModelFlagMappingTable ()->saveModelFlagMapping ( $lastInsertModelID, $lastInsertFlagID);
+						
+					}
+				
+				}
+				
 				return $this->redirect ()->toRoute ( 'sandi', array (
 						'action' => 'upload-Model-Image-File',
 						'id' => $lastInsertModelID 
@@ -292,6 +329,8 @@ class SandiController extends AbstractActionController {
 			}
 		}
 		
+		$category = $this->getModelCategoryTable()->fetchAll();
+
 		return array (
 				'form' => $form,
 				'category' => $category
@@ -969,6 +1008,14 @@ class SandiController extends AbstractActionController {
 		return $this->modelTable;
 	}
 	
+	
+	private function getModelFlagTable() {
+		if (! $this->modelFlagTable) {
+			$sm = $this->getServiceLocator ();
+			$this->modelFlagTable = $sm->get ( 'Sandi\Model\ModelFlagTable' );
+		}
+		return $this->modelFlagTable;
+	}	
 	
 	public function getModelFlagMappingTable() {
 		if (! $this->modelFlagMappingTable) {

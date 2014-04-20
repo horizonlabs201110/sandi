@@ -65,6 +65,25 @@ class Model implements InputFilterAwareInterface {
 		return $this->inputFilter;
 	}
 }
+
+
+class ModelFlag implements InputFilterAwareInterface {
+	public $flag_name;
+	protected $inputFilter;
+	
+	public function exchangeArray($data) {
+		$this->flag_name = (! empty ( $data ['flag_name'] )) ? $data ['flag_name'] : 0;
+	}
+
+	// Add content to these methods:
+	public function setInputFilter(InputFilterInterface $inputFilter) {
+		throw new \Exception ( "Not used" );
+	}
+	public function getInputFilter() {
+		return $this->inputFilter;
+	}
+}
+
 class ModelFlagMapping implements InputFilterAwareInterface {
 	public $model_id;
 	public $flag_id;

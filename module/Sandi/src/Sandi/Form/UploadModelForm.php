@@ -72,6 +72,20 @@ class UploadModelForm extends Form {
 		) );
 		
 		$this->add ( array (
+				'name' => 'tag',
+				'type' => 'Text',
+				'attributes' => array (
+						'class' => 'form-control',
+						'placeholder' => '自定义标签'
+				),
+		
+				'options' => array(
+						'label' => '自定义标签:',
+				),
+					
+		) );		
+		
+		$this->add ( array (
 				'name' => 'price',
 				'type' => 'Text',
 				'attributes' => array (
