@@ -69,9 +69,21 @@ class UserController extends AbstractActionController {
 				
 				$data = $form->getData ();
 				
+				//if user_account is a duplicate one, report error
+				$user_count = $data['user_account'];
+				$count = $this->getUserByUserAccount($user_count);
+				if($count > 0)
+				{
+					return $this->redirect ()->toUrl ( '/sandi/inform/4' );
+				}
+				
 				// 1. save user regist data
 				$user = new User ();
 				$user->exchangeArray ( $form->getData () );
+				
+				$md5pwd = md5($user->password);
+				$user->password = $md5pwd;
+
 				$this->getUserTable ()->saveUser ( $user );
 				
 				// 2. set session as current register user
@@ -313,11 +325,13 @@ class UserController extends AbstractActionController {
 			$user_account = $request->getPost ( 'user_account' );
 			$password = $request->getPost ( 'password' );
 			
+			$md5pwd = md5($password);
+			
 			// if it cannot be found, in which case go to the index page.
 			try 
 			{
 				$user = $this->getUserTable ()->getUser ( $user_account );
-				if (! strcmp ( $password, $user->password )) 
+				if (! strcmp ( $md5pwd, $user->password )) 
 				{
 					$sessionUser = new Container ( 'user' );
 					$sessionUser->name = $user_account;
@@ -353,8 +367,7 @@ class UserController extends AbstractActionController {
 				} 
 				else 
 				{
-					echo "无效的用户名或密码！";
-					return;
+					return $this->redirect ()->toUrl ( '/sandi/inform/3' );
 				}
 			} catch ( \Exception $ex ) 
 			{
@@ -409,6 +422,24 @@ class UserController extends AbstractActionController {
 		$rows = array_values ( iterator_to_array ( $results ) );
 		return $rows;
 	}
+	
+	private function getUserByUserAccount($user_account)
+	{
+		$adapter = $this->getAdapter ();
+		$sql = new Sql ( $adapter );
+		$select = $sql->select ();
+		$select->from ( 't_user' );
+		$select->where ( array (
+				'user_account' => $user_account
+		) );
+		$selectString = $sql->getSqlStringForSqlObject ( $select );
+		$results = $adapter->query ( $selectString, $adapter::QUERY_MODE_EXECUTE );
+		$rows = array_values ( iterator_to_array ( $results ) );
+		
+		
+		return count($rows);
+	}	
+	
 	
 	private function getAdapter() 
 	{

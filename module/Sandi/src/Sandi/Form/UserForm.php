@@ -19,7 +19,7 @@ class UserForm extends Form {
 				'type' => 'Text',
 				'attributes' => array (
 						'class' => 'form-control',
-						'placeholder' => 'user_account' 
+						'placeholder' => '帐号' 
 				) ,
 				
 				'options' => array(
@@ -32,7 +32,7 @@ class UserForm extends Form {
 				'type' => 'Text',
 				'attributes' => array (
 						'class' => 'form-control',
-						'placeholder' => 'alias' 
+						'placeholder' => '昵称' 
 				),
 				
 				'options' => array(
@@ -42,10 +42,10 @@ class UserForm extends Form {
 		
 		$this->add ( array (
 				'name' => 'password',
-				'type' => 'Text',
+				'type' => 'password',
 				'attributes' => array (
 						'class' => 'form-control',
-						'placeholder' => 'password' 
+						'placeholder' => '密码' 
 				),
 				
 				'options' => array(
@@ -70,7 +70,7 @@ class UserForm extends Form {
 				'type' => 'Text',
 				'attributes' => array (
 						'class' => 'form-control',
-						'placeholder' => 'profile'
+						'placeholder' => '简介'
 				),
 				
 				'options' => array(

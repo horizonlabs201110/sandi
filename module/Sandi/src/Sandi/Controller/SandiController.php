@@ -656,9 +656,14 @@ class SandiController extends AbstractActionController {
 
 	
 	public function informAction() {
+		
+		$category = $this->getModelCategoryTable()->fetchAll();
+
 		$id = ( int ) $this->params ()->fromRoute ( 'id', 0 );
+		
 		return new ViewModel ( array (
-				'informID' => $id 
+				'informID' => $id,
+				'category' => $category
 		) );
 	}
 	
