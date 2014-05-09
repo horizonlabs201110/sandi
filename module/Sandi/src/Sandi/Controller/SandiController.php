@@ -296,7 +296,7 @@ class SandiController extends AbstractActionController {
 				$results = $adapter->query ( $insertString, $adapter::QUERY_MODE_EXECUTE );
 				
 				
-				// 5. save customed tag data
+				// 5. save customed tag data 
 				$tag = $data ["tag"];
 				if($tag != NULL)
 				{
@@ -727,7 +727,7 @@ class SandiController extends AbstractActionController {
 					));
 		}
 
-		$offer_id 			= $this->params()->fromRoute('id');	
+		$offer_id = $this->params()->fromRoute('id');	
 				
 		try 
 		{
@@ -753,8 +753,100 @@ class SandiController extends AbstractActionController {
 			
 		}
 		
+		$category = $this->getModelCategoryTable()->fetchAll();
+			
+		return new ViewModel ( array (
+				'category' => $category
+
+		) );		
+		
 		
 	}
+	
+	
+	public function purchaseListAction()
+	{
+		$sessionUser = new Container ( 'user' );
+		if ($sessionUser->user_id == NULL)
+		{
+			return $this->redirect ()->toRoute ( 'sandi', array (
+					'action' => 'index',
+						
+			));
+		}
+	
+		$customer_id = $sessionUser->user_id;
+		
+		try
+		{
+			$adapter = $this->getAdapter ();
+			$sql = new Sql ( $adapter );
+			
+			$data = array(
+					'status'  => rand(2, 3)
+			);
+				
+			$update = $sql->update();
+			$update->table( 't_purchase');
+			$update->set($data);
+			$update->where(array('customer_id' => $customer_id));
+			$statement = $sql->prepareStatementForSqlObject($update);
+			try 
+			{
+				//$updateString = $sql->getSqlStringForSqlObject ( $update );
+				//$results = $adapter->query ( $updateString, $adapter::QUERY_MODE_EXECUTE );
+				$result = $statement->execute();        // works fine
+			} 
+			catch (\Exception $e) 
+			{
+				die('Error: ' . $e->getMessage());
+			}
+			
+// 			if (empty($result)) {                       // not sure if this is applicable??
+// 				die('Zero rows affected');
+// 			}
+
+			
+			
+			
+			
+			$select = $sql->select ();
+			$select->from ( 't_purchase');
+			$select->join('t_offer',
+					't_offer.offer_id = t_purchase.offer_id',
+					array('model_id', 'contents'));
+			$select->join('t_model',
+					't_offer.model_id = t_model.model_id',
+					array('designer_id', 'profile'));
+			
+			$select->where ( array (
+				'customer_id' => $customer_id
+			));
+	
+			$selectString = $sql->getSqlStringForSqlObject ( $select );		
+			$results = $adapter->query ( $selectString, $adapter::QUERY_MODE_EXECUTE );
+			
+			//$purchaseArray =array_values ( iterator_to_array ( $results ) );
+			$purchaseArray = $results->toArray();
+			$category = $this->getModelCategoryTable()->fetchAll();
+			
+			return new ViewModel ( array (
+					'purchaseArray' => $purchaseArray,
+					'category' => $category
+			) );
+		}
+		catch ( \Exception $ex )
+		{
+			//return $this->redirect ()->toRoute ( 'sandi', array (
+			//		'action' => 'index'
+			//) );
+			echo $ex->__toString();
+				
+		}
+	
+	
+	}
+	
 	
 	public function downloadModelAction()
 	{
@@ -765,8 +857,8 @@ class SandiController extends AbstractActionController {
 					'action' => 'index'
 			));
 		}
-		$customer_id = $sessionUser->user_id;
-		$model_id 			= $this->params()->fromRoute('id');
+		$customer_id 	= $sessionUser->user_id;
+		$offer_id 		= $this->params()->fromRoute('id');
 		
 		$adapter = $this->getAdapter ();
 		$sql = new Sql ( $adapter );
@@ -774,20 +866,21 @@ class SandiController extends AbstractActionController {
 		$select->from ( 't_offer');
 		$select->join('t_purchase',
 		 't_offer.offer_id = t_purchase.offer_id',
-		 array('customer_id', 'status'));
+		 array('customer_id', 'offer_id', 'status'));
 		
 		$select->where ( array (
 				'customer_id' => $customer_id,
-				'model_id' => $model_id
+				't_purchase.offer_id' => $offer_id
 		) );
 		$selectString = $sql->getSqlStringForSqlObject ( $select );
 		
 		$results = $adapter->query ( $selectString, $adapter::QUERY_MODE_EXECUTE );
-		 //$resultArray = $results->toArray();
+
 		 if ($results->count() == 1)
 		 {
 		 	$row = $results->current();
-		 	//if($row->status == 2)
+		 	
+		 	if($row->status == 2)
 		 	{
 		 		$iRet = $this->archiveModel($customer_id, $row->model_id);
 		 		
@@ -839,20 +932,22 @@ class SandiController extends AbstractActionController {
 					),
 			));
 			
-			$dh = opendir ( $modelFilePath );
-			if ($dh) 
-			{
-				while ( ($file = readdir ( $dh )) !== false ) 
-				{
-					if ($file != '.' && $file != '..') 
-					{
+// 			$dh = opendir ( $modelFilePath );
+// 			if ($dh) 
+// 			{
+// 				while ( ($file = readdir ( $dh )) !== false ) 
+// 				{
+// 					if ($file != '.' && $file != '..') 
+// 					{
 						
-						$compressed = $filter->filter("$modelFilePath/$file");
-						copy("$modelFilePath/$file", "$dest/$file");
-					}
-				}
-				closedir ( $dh );
-			}
+// 						$compressed = $filter->filter("$modelFilePath/$file");
+// 						copy("$modelFilePath/$file", "$dest/$file");
+// 					}
+// 				}
+// 				closedir ( $dh );
+// 			}
+			
+			$compressed = $filter->filter("$modelFilePath");
 			
 		}
 		else
@@ -900,22 +995,30 @@ class SandiController extends AbstractActionController {
 // 			closedir ( $dp );
 // 		}
 		$file = $model_id . ".zip";
-		$fileContents = file_get_contents("$zipPath/$file");
+		$filename = $zipPath. "/" . $file;
+		//$fileContents = file_get_contents("$zipPath/$file");
 		
 		// Directly return the Response
 		$response = $this->getEvent()->getResponse();
 			
 		$response->getHeaders()->addHeaders ( array (
-				//'Content-Type' => 'application/octet-stream',
+				'Cache-Control' => 'public',
+				'Content-Description' => 'File Transfer',
+				'Content-Disposition' => "attachment;filename= " . $file,
+				'Content-Type' => 'application/zip',
+				'Content-Transfer-Encoding' => 'binary',
+				'Content-Length' => filesize($filename),
+				 //'Content-Type' => 'application/octet-stream',
 				//'Content-Type' => 'image/png',
-				'Content-Disposition' => "attachment;filename=$file",
-				'Content-Length' => strlen($fileContents),
-				//'Content-Length', filesize("$zipPath/$file")
+				//'Content-Disposition' => "attachment;filename=$file",
+				//'Content-Length' => strlen($fileContents),
+
 				//'Content-Transfer-Encoding' => 'Binary'
 					
 		) );
 			
-		$response->setContent ( $fileContents );
+		//$response->setContent ( $fileContents );
+		@readfile($filename);
 		//echo $response;
 		return $response;
 
