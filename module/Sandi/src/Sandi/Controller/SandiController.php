@@ -880,6 +880,17 @@ class SandiController extends AbstractActionController {
 		 {
 		 	$row = $results->current();
 		 	
+		 	if($row->status == 3)
+		 	{
+		 		
+// 		 		return new ViewModel ( array (
+// 		 				'message' =>  "您已经下载过该模型！"
+		 		
+// 		 		) );
+		 		
+		 		echo "您已经下载过该模型！";
+		 	}
+		 	
 		 	if($row->status == 2)
 		 	{
 		 		$iRet = $this->archiveModel($customer_id, $row->model_id);
@@ -889,6 +900,7 @@ class SandiController extends AbstractActionController {
 		 			$this->downloadModel($customer_id, $row->model_id);
 		 		}
 		 	}
+		 	
 
 		 }
 		 else
