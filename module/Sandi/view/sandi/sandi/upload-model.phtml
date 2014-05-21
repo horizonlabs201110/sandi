@@ -75,6 +75,13 @@
 						<?php echo $this->formHidden($form->get('user_id')); ?>
 						<?php echo $this->formRow($form->get('profile')); ?><br>
 						<?php echo $this->formRow($form->get('price')); ?><br>
+ 
+<?php 
+    $name = $form->get('price'); 
+    echo $this->formElementErrors($name); 
+?> 
+						
+						
 						<?php echo $this->formRow($form->get('tag')); ?><br>
 						<?php echo $this->formRow($form->get('offer')); ?><br>
 						<?php echo $this->formRow($form->get('category')); ?><br>

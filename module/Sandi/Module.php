@@ -37,6 +37,12 @@ class Module {
 	}
 	public function getServiceConfig() {
 		return array (
+// 				'validators' => array(
+// 				     'invokables' => array(
+// 				         'NumericBetween' => 'Sandi\Validators\NumericBetween'
+// 				     ),
+// 				 ),
+				
 				'factories' => array (
 						'Sandi\Model\ModelTable' => function ($sm) {
 							$tableGateway = $sm->get ( 'ModelTableGateway' );
@@ -107,7 +113,9 @@ class Module {
 							$resultSetPrototype = new ResultSet ();
 							$resultSetPrototype->setArrayObjectPrototype ( new User () );
 							return new TableGateway ( 't_user', $dbAdapter, null, $resultSetPrototype );
-						} 
+						}
+
+						//'NumericBetween' => 'Sandi\Validator\NumericBetween'
 				) 
 		);
 	}

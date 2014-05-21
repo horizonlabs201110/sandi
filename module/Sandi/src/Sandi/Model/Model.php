@@ -14,8 +14,12 @@ class Model implements InputFilterAwareInterface {
 	public $owner_id;
 	public $profile;
 	// public $create_time;
+	
 	protected $inputFilter;
-	public function exchangeArray($data) {
+	
+	
+	public function exchangeArray($data) 
+	{
 		$this->model_id = (! empty ( $data ['model_id'] )) ? $data ['model_id'] : null;
 		$this->designer_id = (! empty ( $data ['user_id'] )) ? $data ['user_id'] : null;
 		$this->owner_id = (! empty ( $data ['owner_id'] )) ? $data ['owner_id'] : null;
@@ -23,30 +27,33 @@ class Model implements InputFilterAwareInterface {
 	}
 	
 	// Add the following method:
-	public function getArrayCopy() {
+	public function getArrayCopy()
+	{
 		return get_object_vars ( $this );
 	}
 	
 	// Add content to these methods:
-	public function setInputFilter(InputFilterInterface $inputFilter) {
+	public function setInputFilter(InputFilterInterface $inputFilter)
+	{
 		throw new \Exception ( "Not used" );
 	}
-	public function getInputFilter() {
-		if (! $this->inputFilter) {
+	
+	
+	public function getInputFilter() 
+	{
+		if (! $this->inputFilter) 
+		{
 			$inputFilter = new InputFilter ();
 			$factory = new InputFactory ();
-			
+
 			$inputFilter->add ( $factory->createInput ( array (
 					'name' => 'profile',
 					'required' => true,
 					'filters' => array (
-							array (
-									'name' => 'StripTags' 
-							),
-							array (
-									'name' => 'StringTrim' 
-							) 
+							array (	'name' => 'StripTags' ),
+							array (	'name' => 'StringTrim' ) 
 					),
+					
 					'validators' => array (
 							array (
 									'name' => 'StringLength',
@@ -58,6 +65,20 @@ class Model implements InputFilterAwareInterface {
 							) 
 					) 
 			) ) );
+			
+
+			$inputFilter->add($factory->createInput(array(	
+			
+					'name'     => 'price',
+					'required' => true,
+					'validators' => array (
+							array (
+									'name' => 'Sandi\Validators\NumericBetween',
+							 )
+							)
+			)));
+				
+			
 			
 			$this->inputFilter = $inputFilter;
 		}
@@ -101,3 +122,7 @@ class ModelFlagMapping implements InputFilterAwareInterface {
 		return $this->inputFilter;
 	}
 }
+
+
+
+

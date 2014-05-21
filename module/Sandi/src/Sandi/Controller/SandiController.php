@@ -231,15 +231,18 @@ class SandiController extends AbstractActionController {
 		$request = $this->getRequest ();
 		if ($request->isPost ()) {
 			// Make certain to merge the files info!
-			$post = array_merge_recursive ( $request->getPost ()->toArray (), $request->getFiles ()->toArray () );
+			//$post = array_merge_recursive ( $request->getPost ()->toArray (), $request->getFiles ()->toArray () );
+			//$form->setData ( $post );
 			
-			$form->setData ( $post );
+			$model = new Model ();
+			$form->setInputFilter($model->getInputFilter());
+			$form->setData ( $request->getPost ());
+			
 			if ($form->isValid ()) {
 				
 				$data = $form->getData ();
 				
 				// 1. save model data
-				$model = new Model ();
 				$model->exchangeArray ( $data );
 				$model->owner_id = $sessionUser->user_id;
 				$model->designer_id = $sessionUser->user_id;
@@ -721,10 +724,7 @@ class SandiController extends AbstractActionController {
 		$sessionUser = new Container ( 'user' );
 		if ($sessionUser->user_id == NULL)
 		{
-			return $this->redirect ()->toRoute ( 'sandi', array (
-					'action' => 'index',
-					
-					));
+			return $this->redirect ()->toUrl ( '/sandi/inform/201' );
 		}
 
 		$offer_id = $this->params()->fromRoute('id');	

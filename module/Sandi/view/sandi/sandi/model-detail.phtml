@@ -79,11 +79,6 @@ $downloadFlag = ($grant [0] ['grant_bitmap'] >> 3) & 1;
 					<p>价格: <?php echo $this->escapeHtml($offer[0]["contents"]);?> 元</p>
 				</div>
 			</div>
-			<div>
-				<span class="glyphicon glyphicon-star"><?php echo "purchaseFlag ". $purchaseFlag; ?></span>
-				<span class="glyphicon glyphicon-star"><?php echo "printFlag " .$printFlag; ?></span>
-				<span class="glyphicon glyphicon-star"><?php echo "downloadFlag " . $downloadFlag; ?></span>
-			</div>
 			<div class="col-xs-6 col-sm-4 sidebar-offcanvas cart-list"
 				id="sidebar" role="navigation">
 			<?php if ($sessionUser->user_id == $model[0]["owner_id"]) {?>
@@ -120,32 +115,5 @@ $downloadFlag = ($grant [0] ['grant_bitmap'] >> 3) & 1;
         </div>
 		</div>
 	</div>
-
-	<div class="container">
-		<p>相关模型</p>
-		<div class="row">
-			<div class="col-sm-6 col-md-3">
-				<div class="thumbnail">
-					<h5>title</h5>
-					<img data-src="holder.js/240x200" alt="..." src="src/img/pro.jpg">
-					<div class="caption">
-						<h3>Thumbnail label</h3>
-						<p>...</p>
-						<p>
-						
-						
-						<p class="frome-text">Frome:$77.00</p>
-						<span class="glyphicon glyphicon-star"></span> <span
-							class="glyphicon glyphicon-star"></span> <span
-							class="glyphicon glyphicon-star"></span> <span href="#"
-							class="glyphicon glyphicon-star-empty"></span> <span href="#"
-							class="glyphicon glyphicon-star-empty"></span>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<hr>
 </body>
 </html>
